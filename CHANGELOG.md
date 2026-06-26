@@ -38,6 +38,17 @@ Após estabelecer as bases do projeto, notamos a necessidade de uma refatoraçã
 - **Refatoração Completa de Componentes:** Foram refatorados os componentes chave do sistema para usar unicamente as diretivas tailwind e a função `cn()` para interações dinâmicas. Entre eles: `AuthModal.tsx`, `NavBar.tsx`, `FilterBar.tsx`, `PhotoCard.tsx`, `PhotoModal.tsx`, `UploadModal.tsx`, `EventsPanel.tsx` e `EventFormModal.tsx`.
 - **Mapeamento de Cores Constantes (`data.ts`):** O `EVENT_COLOR_MAP` foi reescrito. Em vez de injetar strings RGB brutas inline (`rgba(X, Y, Z)`), os mapas de cores agora retornam classes semânticas e literais do Tailwind (como `bg-cyan-primary/[0.12]`), garantindo precisão milimétrica sem desvios do guia de estilos principal.
 
+## 5. Fase 2: Autenticação, Proteção de Rotas e Redesign da Landing Page
+Após a estruturação base, avançamos para a implementação de segurança e criação de uma porta de entrada amigável para o usuário.
+- **Supabase SSR:** Instalação e configuração do pacote `@supabase/ssr` para gerenciar a autenticação e cookies em ambientes Server-Side. Foram criados os clientes `client.ts` e `server.ts` dentro de `src/lib/supabase/`.
+- **Proteção via Proxy (Middleware):** Implementamos o arquivo `src/proxy.ts` (convenção Next.js) que intercepta todas as requisições para caminhos protegidos (como `/gallery`), validando a sessão do usuário no Supabase e redirecionando para o login caso não esteja autenticado.
+- **Isolamento de Rotas:** O sistema foi dividido. A rota raiz `/` tornou-se uma página pública (Landing Page), enquanto o núcleo da aplicação (galeria e painéis) foi movido com segurança para `/gallery`.
+- **Redesign da Landing Page (V2):** Refatoramos completamente a página inicial para focar na conversão, criando uma experiência *Premium*:
+  - **Split Layout:** Dividimos o layout desktop em 50/50.
+  - **Marquee Infinito:** Adicionamos uma "parede de fotos" no lado direito, deslizando infinitamente usando Framer Motion, com interatividade (pause-on-hover) e zoom nas fotos.
+  - **Estilização Refinada:** Textos ganhando *text-gradients* e um logotipo de câmera minimalista gerado (neon).
+- **Componentes Globais:** Criação de um utilitário central para carregamentos suaves (`<LoadingSpinner />`), padronizando o feedback visual no sistema.
+
 ---
 
 > **A partir de agora:** Todas as novas features, refatorações ou decisões estruturais importantes devem ser logadas neste arquivo ou em subarquivos de histórico, mantendo a documentação técnica impecável e acompanhando o histórico de prompts.

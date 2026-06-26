@@ -1,6 +1,7 @@
 import { Camera, Upload, CalendarDays, Search, X, LogIn, LogOut } from 'lucide-react';
 import { motion } from 'motion/react';
-import { supabase } from '@/lib/supabaseClient';
+import { createClient } from '@/lib/supabase/client';
+const supabase = createClient();
 import type { User } from '@supabase/supabase-js';
 import { cn } from '@/lib/utils';
 
