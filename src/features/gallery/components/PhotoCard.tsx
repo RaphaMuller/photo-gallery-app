@@ -11,13 +11,13 @@ interface PhotoCardProps {
 }
 
 const TAG_COLORS: Record<string, string> = {
-  urban: 'text-cyan-primary bg-cyan-primary/[0.12] border-cyan-primary/[0.2]',
-  portrait: 'text-[#a78bfa] bg-[#a78bfa]/[0.12] border-[#a78bfa]/[0.2]',
-  nature: 'text-[#4ecdc4] bg-[#4ecdc4]/[0.12] border-[#4ecdc4]/[0.2]',
-  architecture: 'text-[#fbbf24] bg-[#fbbf24]/[0.12] border-[#fbbf24]/[0.2]',
-  abstract: 'text-[#fb7185] bg-[#fb7185]/[0.12] border-[#fb7185]/[0.2]',
-  travel: 'text-[#34d399] bg-[#34d399]/[0.12] border-[#34d399]/[0.2]',
-  night: 'text-[#818cf8] bg-[#818cf8]/[0.12] border-[#818cf8]/[0.2]',
+  urban: 'text-cyan-primary bg-cyan-primary/12 border-cyan-primary/20',
+  portrait: 'text-purple bg-purple/12 border-purple/20',
+  nature: 'text-teal bg-teal/12 border-teal/20',
+  architecture: 'text-amber bg-amber/12 border-amber/20',
+  abstract: 'text-rose bg-rose/12 border-rose/20',
+  travel: 'text-green bg-green/12 border-green/20',
+  night: 'text-indigo bg-indigo/12 border-indigo/20',
 };
 
 export function PhotoCard({ photo, onClick }: PhotoCardProps) {
@@ -36,10 +36,10 @@ export function PhotoCard({ photo, onClick }: PhotoCardProps) {
   return (
     <motion.div
       className={cn(
-        "relative overflow-hidden rounded-xl cursor-pointer mb-3 bg-[#14141a]/60 backdrop-blur-[16px] transition-[border-color,box-shadow] duration-250 ease-out border",
+        "relative overflow-hidden rounded-xl cursor-pointer mb-3 bg-surface-card/60 backdrop-blur-[16px] transition-[border-color,box-shadow] duration-250 ease-out border",
         hovered
-          ? "border-cyan-primary/40 shadow-[0_0_24px_rgba(0,217,255,0.2),0_0_48px_rgba(0,217,255,0.08),inset_0_0_24px_rgba(0,217,255,0.03)]"
-          : "border-cyan-primary/[0.12] shadow-[0_2px_16px_rgba(0,0,0,0.4)]"
+          ? "border-cyan-primary/40 shadow-card-glow"
+          : "border-cyan-primary/12 shadow-card"
       )}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
@@ -74,7 +74,7 @@ export function PhotoCard({ photo, onClick }: PhotoCardProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b]/95 via-[#0a0a0b]/40 to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-surface-deep/95 via-surface-deep/40 to-transparent"
             />
           )}
         </AnimatePresence>
@@ -117,12 +117,12 @@ export function PhotoCard({ photo, onClick }: PhotoCardProps) {
               transition={{ duration: 0.2 }}
               className="absolute bottom-0 left-0 right-0 px-3 pb-3 pt-8"
             >
-              <p className="truncate mb-1 font-bungee text-[0.8rem] tracking-[-0.01em] text-foreground">
+              <p className="truncate mb-1 font-bungee text-sm tracking-[-0.01em] text-foreground">
                 {photo.title}
               </p>
               <div className="flex items-center gap-1.5">
                 <Calendar size={10} className="text-muted-foreground" />
-                <span className="font-mono-tech text-[0.65rem] text-muted-foreground">
+                <span className="font-mono-tech text-2xs text-muted-foreground">
                   {formattedDate}
                 </span>
               </div>
@@ -137,14 +137,14 @@ export function PhotoCard({ photo, onClick }: PhotoCardProps) {
           <span
             key={tag}
             className={cn(
-              "font-changa text-[0.6rem] tracking-[0.05em] px-1.5 py-[1px] rounded-full border",
-              TAG_COLORS[tag] || "text-cyan-primary bg-cyan-primary/[0.12] border-cyan-primary/[0.2]"
+              "font-changa text-2xs tracking-[0.05em] px-1.5 py-[1px] rounded-full border",
+              TAG_COLORS[tag] || "text-cyan-primary bg-cyan-primary/12 border-cyan-primary/20"
             )}
           >
             {tag.toUpperCase()}
           </span>
         ))}
-        <span className="ml-auto self-center font-mono-tech text-[0.6rem] text-muted-foreground">
+        <span className="ml-auto self-center font-mono-tech text-2xs text-muted-foreground">
           {photo.group_id.split(' ')[0]}
         </span>
       </div>

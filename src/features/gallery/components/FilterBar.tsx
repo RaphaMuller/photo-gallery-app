@@ -42,7 +42,7 @@ export function FilterBar({
 
   return (
     <div
-      className="flex items-center gap-3 px-5 py-2.5 overflow-x-auto bg-[#0a0a0b]/60 backdrop-blur-[12px] border-b border-cyan-primary/[0.08] [scrollbar-width:none]"
+      className="flex items-center gap-3 px-5 py-2.5 overflow-x-auto bg-surface-deep/60 backdrop-blur-[12px] border-b border-cyan-primary/[0.08] [scrollbar-width:none]"
     >
       {/* Tags */}
       <div className="flex items-center gap-1.5 shrink-0">
@@ -55,9 +55,9 @@ export function FilterBar({
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.95 }}
               className={cn(
-                "px-2.5 py-0.5 rounded-full transition-colors font-changa text-[0.65rem] tracking-[0.06em] whitespace-nowrap border",
+                "px-2.5 py-0.5 rounded-full transition-colors font-changa text-2xs tracking-[0.06em] whitespace-nowrap border",
                 isActive
-                  ? "bg-cyan-primary text-[#0A0A0B] border-cyan-primary"
+                  ? "bg-cyan-primary text-primary-foreground border-cyan-primary"
                   : "bg-cyan-primary/[0.07] text-cyan-primary border-cyan-primary/20"
               )}
             >
@@ -72,7 +72,7 @@ export function FilterBar({
 
       {/* Count */}
       <span
-        className="shrink-0 font-mono-tech text-[0.7rem] text-muted-foreground whitespace-nowrap"
+        className="shrink-0 font-mono-tech text-xs text-muted-foreground whitespace-nowrap"
       >
         {filteredCount === totalCount
           ? `${totalCount} photos`
@@ -85,7 +85,7 @@ export function FilterBar({
         <select
           value={sortOption}
           onChange={(e) => onSortChange(e.target.value as SortOption)}
-          className="rounded-md px-2 py-1 outline-none cursor-pointer font-inter text-[0.75rem] bg-white/5 border border-cyan-primary/[0.12] text-muted-foreground"
+          className="rounded-md px-2 py-1 outline-none cursor-pointer font-inter text-xs bg-white/5 border border-cyan-primary/[0.12] text-muted-foreground"
         >
           {SORT_OPTIONS.map((o) => (
             <option key={o.value} value={o.value} className="bg-popover">

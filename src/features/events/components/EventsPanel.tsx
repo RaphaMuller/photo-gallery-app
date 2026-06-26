@@ -48,7 +48,7 @@ function MiniCalendar({ events }: { events: CalendarEvent[] }) {
         >
           <ChevronLeft size={14} />
         </button>
-        <span className="font-bungee text-[0.75rem] tracking-[-0.01em] text-foreground">
+        <span className="font-bungee text-xs tracking-[-0.01em] text-foreground">
           {MONTH_NAMES[month].toUpperCase()} {year}
         </span>
         <button
@@ -62,7 +62,7 @@ function MiniCalendar({ events }: { events: CalendarEvent[] }) {
       {/* Day name headers */}
       <div className="grid grid-cols-7 mb-1">
         {DAY_NAMES.map((d) => (
-          <div key={d} className="text-center font-mono-tech text-[0.6rem] text-muted-foreground pb-1">
+          <div key={d} className="text-center font-mono-tech text-2xs text-muted-foreground pb-1">
             {d}
           </div>
         ))}
@@ -83,7 +83,7 @@ function MiniCalendar({ events }: { events: CalendarEvent[] }) {
               <div
                 className={cn("w-6 h-6 flex items-center justify-center rounded-full relative border", isToday ? "bg-cyan-primary/20 border-cyan-primary/50" : "bg-transparent border-transparent")}
               >
-                <span className={cn("font-bungee text-[0.6rem]", isToday ? "text-cyan-primary" : day <= today.getDate() && month <= today.getMonth() && year <= today.getFullYear() ? "text-foreground" : "text-muted-foreground")}>
+                <span className={cn("font-bungee text-2xs", isToday ? "text-cyan-primary" : day <= today.getDate() && month <= today.getMonth() && year <= today.getFullYear() ? "text-foreground" : "text-muted-foreground")}>
                   {day}
                 </span>
               </div>
@@ -119,15 +119,15 @@ function EventItem({ event }: { event: CalendarEvent }) {
           className={cn("w-2 h-2 rounded-full mt-1 shrink-0", colors.dotClass, colors.shadowClass)}
         />
         <div className="flex-1 min-w-0">
-          <p className="truncate font-inter text-[0.8rem] font-medium text-foreground">
+          <p className="truncate font-inter text-sm font-medium text-foreground">
             {event.title}
           </p>
           <div className="flex items-center gap-2 mt-0.5">
-            <span className="font-mono-tech text-[0.65rem] text-muted-foreground">
+            <span className="font-mono-tech text-2xs text-muted-foreground">
               {formattedDate}
             </span>
-            <span className="text-muted-foreground text-[0.65rem]">·</span>
-            <span className={cn("font-mono-tech text-[0.65rem]", colors.textClass)}>
+            <span className="text-muted-foreground text-2xs">·</span>
+            <span className={cn("font-mono-tech text-2xs", colors.textClass)}>
               {event.event_time}
             </span>
           </div>
@@ -144,7 +144,7 @@ function EventItem({ event }: { event: CalendarEvent }) {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <p className="px-3 pb-3 font-inter text-[0.75rem] text-muted-foreground leading-relaxed">
+            <p className="px-3 pb-3 font-inter text-xs text-muted-foreground leading-relaxed">
               {event.description}
             </p>
           </motion.div>
@@ -165,7 +165,7 @@ export function EventsPanel({ events, onNewEvent }: EventsPanelProps) {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <CalendarDays size={15} className="text-cyan-primary" />
-          <span className="font-bungee text-[0.8rem] tracking-[-0.01em] text-foreground">
+          <span className="font-bungee text-sm tracking-[-0.01em] text-foreground">
             SCHEDULE
           </span>
         </div>
@@ -173,7 +173,7 @@ export function EventsPanel({ events, onNewEvent }: EventsPanelProps) {
           onClick={onNewEvent}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="flex items-center gap-1 px-2.5 py-1 rounded-lg font-inter text-[0.72rem] font-medium text-cyan-primary bg-cyan-primary/10 border border-cyan-primary/25"
+          className="flex items-center gap-1 px-2.5 py-1 rounded-lg font-inter text-xs font-medium text-cyan-primary bg-cyan-primary/10 border border-cyan-primary/25"
         >
           <Plus size={12} />
           New
@@ -184,7 +184,7 @@ export function EventsPanel({ events, onNewEvent }: EventsPanelProps) {
       <MiniCalendar events={events} />
 
       {/* Upcoming label */}
-      <p className="mb-2 font-mono-tech text-[0.65rem] tracking-[0.08em] text-muted-foreground">
+      <p className="mb-2 font-mono-tech text-2xs tracking-[0.08em] text-muted-foreground">
         UPCOMING ({upcoming.length})
       </p>
 
@@ -195,7 +195,7 @@ export function EventsPanel({ events, onNewEvent }: EventsPanelProps) {
         ))}
         {upcoming.length === 0 && (
           <div className="text-center py-8">
-            <p className="font-inter text-[0.75rem] text-muted-foreground">
+            <p className="font-inter text-xs text-muted-foreground">
               No upcoming events
             </p>
           </div>

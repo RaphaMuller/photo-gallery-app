@@ -16,13 +16,13 @@ interface PhotoModalProps {
 }
 
 const TAG_COLORS: Record<string, string> = {
-  urban: 'text-cyan-primary bg-cyan-primary/[0.12] border-cyan-primary/[0.2]',
-  portrait: 'text-[#a78bfa] bg-[#a78bfa]/[0.12] border-[#a78bfa]/[0.2]',
-  nature: 'text-[#4ecdc4] bg-[#4ecdc4]/[0.12] border-[#4ecdc4]/[0.2]',
-  architecture: 'text-[#fbbf24] bg-[#fbbf24]/[0.12] border-[#fbbf24]/[0.2]',
-  abstract: 'text-[#fb7185] bg-[#fb7185]/[0.12] border-[#fb7185]/[0.2]',
-  travel: 'text-[#34d399] bg-[#34d399]/[0.12] border-[#34d399]/[0.2]',
-  night: 'text-[#818cf8] bg-[#818cf8]/[0.12] border-[#818cf8]/[0.2]',
+  urban: 'text-cyan-primary bg-cyan-primary/12 border-cyan-primary/20',
+  portrait: 'text-purple bg-purple/12 border-purple/20',
+  nature: 'text-teal bg-teal/12 border-teal/20',
+  architecture: 'text-amber bg-amber/12 border-amber/20',
+  abstract: 'text-rose bg-rose/12 border-rose/20',
+  travel: 'text-green bg-green/12 border-green/20',
+  night: 'text-indigo bg-indigo/12 border-indigo/20',
 };
 
 const STICKER_FRAMES = [
@@ -31,66 +31,66 @@ const STICKER_FRAMES = [
     borderMarker: 'border-cyan-primary',
     borderSelected: 'border-cyan-primary',
     bgSelected: 'bg-cyan-primary/15',
-    shadowSmall: 'shadow-[0_0_12px_rgba(0,217,255,0.5)]',
-    shadowLarge: 'shadow-[0_0_24px_rgba(0,217,255,0.5),0_0_48px_rgba(0,217,255,0.25)]',
+    shadowSmall: 'shadow-glow-sm-cyan',
+    shadowLarge: 'shadow-glow-lg-cyan',
     gradient: 'from-cyan-primary/20 to-transparent',
     bgSolid: 'bg-cyan-primary',
     bgGradient: 'from-cyan-primary to-cyan-primary/80',
   },
   { id: 'neon', label: 'NEON', icon: Square,
-    text: 'text-[#a78bfa]',
-    borderMarker: 'border-[#a78bfa]',
-    borderSelected: 'border-[#a78bfa]',
-    bgSelected: 'bg-[#a78bfa]/15',
-    shadowSmall: 'shadow-[0_0_12px_rgba(167,139,250,0.5)]',
-    shadowLarge: 'shadow-[0_0_24px_rgba(167,139,250,0.5),0_0_48px_rgba(167,139,250,0.25)]',
-    gradient: 'from-[#a78bfa]/20 to-transparent',
-    bgSolid: 'bg-[#a78bfa]',
-    bgGradient: 'from-[#a78bfa] to-[#a78bfa]/80',
+    text: 'text-purple',
+    borderMarker: 'border-purple',
+    borderSelected: 'border-purple',
+    bgSelected: 'bg-purple/15',
+    shadowSmall: 'shadow-glow-sm-purple',
+    shadowLarge: 'shadow-glow-lg-purple',
+    gradient: 'from-purple/20 to-transparent',
+    bgSolid: 'bg-purple',
+    bgGradient: 'from-purple to-purple/80',
   },
   { id: 'retro', label: 'RETRO', icon: Circle,
-    text: 'text-[#fb7185]',
-    borderMarker: 'border-[#fb7185]',
-    borderSelected: 'border-[#fb7185]',
-    bgSelected: 'bg-[#fb7185]/15',
-    shadowSmall: 'shadow-[0_0_12px_rgba(251,113,133,0.5)]',
-    shadowLarge: 'shadow-[0_0_24px_rgba(251,113,133,0.5),0_0_48px_rgba(251,113,133,0.25)]',
-    gradient: 'from-[#fb7185]/20 to-transparent',
-    bgSolid: 'bg-[#fb7185]',
-    bgGradient: 'from-[#fb7185] to-[#fb7185]/80',
+    text: 'text-rose',
+    borderMarker: 'border-rose',
+    borderSelected: 'border-rose',
+    bgSelected: 'bg-rose/15',
+    shadowSmall: 'shadow-glow-sm-rose',
+    shadowLarge: 'shadow-glow-lg-rose',
+    gradient: 'from-rose/20 to-transparent',
+    bgSolid: 'bg-rose',
+    bgGradient: 'from-rose to-rose/80',
   },
   { id: 'sharp', label: 'SHARP', icon: Triangle,
-    text: 'text-[#fbbf24]',
-    borderMarker: 'border-[#fbbf24]',
-    borderSelected: 'border-[#fbbf24]',
-    bgSelected: 'bg-[#fbbf24]/15',
-    shadowSmall: 'shadow-[0_0_12px_rgba(251,191,36,0.5)]',
-    shadowLarge: 'shadow-[0_0_24px_rgba(251,191,36,0.5),0_0_48px_rgba(251,191,36,0.25)]',
-    gradient: 'from-[#fbbf24]/20 to-transparent',
-    bgSolid: 'bg-[#fbbf24]',
-    bgGradient: 'from-[#fbbf24] to-[#fbbf24]/80',
+    text: 'text-amber',
+    borderMarker: 'border-amber',
+    borderSelected: 'border-amber',
+    bgSelected: 'bg-amber/15',
+    shadowSmall: 'shadow-glow-sm-amber',
+    shadowLarge: 'shadow-glow-lg-amber',
+    gradient: 'from-amber/20 to-transparent',
+    bgSolid: 'bg-amber',
+    bgGradient: 'from-amber to-amber/80',
   },
   { id: 'glitch', label: 'GLITCH', icon: Layers,
-    text: 'text-[#4ecdc4]',
-    borderMarker: 'border-[#4ecdc4]',
-    borderSelected: 'border-[#4ecdc4]',
-    bgSelected: 'bg-[#4ecdc4]/15',
-    shadowSmall: 'shadow-[0_0_12px_rgba(78,205,196,0.5)]',
-    shadowLarge: 'shadow-[0_0_24px_rgba(78,205,196,0.5),0_0_48px_rgba(78,205,196,0.25)]',
-    gradient: 'from-[#4ecdc4]/20 to-transparent',
-    bgSolid: 'bg-[#4ecdc4]',
-    bgGradient: 'from-[#4ecdc4] to-[#4ecdc4]/80',
+    text: 'text-teal',
+    borderMarker: 'border-teal',
+    borderSelected: 'border-teal',
+    bgSelected: 'bg-teal/15',
+    shadowSmall: 'shadow-glow-sm-teal',
+    shadowLarge: 'shadow-glow-lg-teal',
+    gradient: 'from-teal/20 to-transparent',
+    bgSolid: 'bg-teal',
+    bgGradient: 'from-teal to-teal/80',
   },
   { id: 'star', label: 'STAR', icon: Star,
-    text: 'text-[#34d399]',
-    borderMarker: 'border-[#34d399]',
-    borderSelected: 'border-[#34d399]',
-    bgSelected: 'bg-[#34d399]/15',
-    shadowSmall: 'shadow-[0_0_12px_rgba(52,211,153,0.5)]',
-    shadowLarge: 'shadow-[0_0_24px_rgba(52,211,153,0.5),0_0_48px_rgba(52,211,153,0.25)]',
-    gradient: 'from-[#34d399]/20 to-transparent',
-    bgSolid: 'bg-[#34d399]',
-    bgGradient: 'from-[#34d399] to-[#34d399]/80',
+    text: 'text-green',
+    borderMarker: 'border-green',
+    borderSelected: 'border-green',
+    bgSelected: 'bg-green/15',
+    shadowSmall: 'shadow-glow-sm-green',
+    shadowLarge: 'shadow-glow-lg-green',
+    gradient: 'from-green/20 to-transparent',
+    bgSolid: 'bg-green',
+    bgGradient: 'from-green to-green/80',
   },
 ];
 
@@ -111,10 +111,10 @@ function StickerCreator({ photo }: { photo: Photo }) {
               )}
               onClick={() => setStep(s)}
             >
-              <span className={cn("font-mono-tech text-[0.6rem]", step === s ? "text-cyan-primary" : "text-muted-foreground")}>
+              <span className={cn("font-mono-tech text-2xs", step === s ? "text-cyan-primary" : "text-muted-foreground")}>
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span className={cn("font-inter text-[0.7rem] font-medium capitalize", step === s ? "text-foreground" : "text-muted-foreground")}>
+              <span className={cn("font-inter text-xs font-medium capitalize", step === s ? "text-foreground" : "text-muted-foreground")}>
                 {s}
               </span>
             </div>
@@ -133,7 +133,7 @@ function StickerCreator({ photo }: { photo: Photo }) {
             transition={{ duration: 0.2 }}
             className="flex flex-col flex-1"
           >
-            <p className="mb-3 font-inter text-[0.75rem] text-muted-foreground">
+            <p className="mb-3 font-inter text-xs text-muted-foreground">
               Choose a frame style for your sticker:
             </p>
             <div className="grid grid-cols-3 gap-2">
@@ -152,7 +152,7 @@ function StickerCreator({ photo }: { photo: Photo }) {
                     )}
                   >
                     <Icon size={18} className={isSelected ? frame.text : "text-muted-foreground"} />
-                    <span className={cn("font-changa text-[0.6rem] tracking-[0.05em]", isSelected ? frame.text : "text-muted-foreground")}>
+                    <span className={cn("font-changa text-2xs tracking-[0.05em]", isSelected ? frame.text : "text-muted-foreground")}>
                       {frame.label}
                     </span>
                   </motion.button>
@@ -163,7 +163,7 @@ function StickerCreator({ photo }: { photo: Photo }) {
               onClick={() => setStep('preview')}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
-              className="mt-4 py-2.5 rounded-xl flex items-center justify-center gap-2 bg-gradient-to-br from-cyan-primary to-cyan-dim text-[#0A0A0B] font-inter font-semibold text-[0.8rem]"
+              className="mt-4 py-2.5 rounded-xl flex items-center justify-center gap-2 bg-gradient-to-br from-cyan-primary to-cyan-dim text-primary-foreground font-inter font-semibold text-sm"
             >
               <Scissors size={14} />
               Preview Sticker
@@ -217,7 +217,7 @@ function StickerCreator({ photo }: { photo: Photo }) {
               </div>
               <div
                 className={cn(
-                  "absolute -bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded text-[#0A0A0B] font-bungee text-[0.55rem] tracking-[0.04em] whitespace-nowrap",
+                  "absolute -bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded text-primary-foreground font-bungee text-3xs tracking-[0.04em] whitespace-nowrap",
                   selectedFrame.bgSolid
                 )}
               >
@@ -225,21 +225,21 @@ function StickerCreator({ photo }: { photo: Photo }) {
               </div>
             </div>
 
-            <p className="text-center mb-4 font-inter text-[0.72rem] text-muted-foreground max-w-[200px]">
+            <p className="text-center mb-4 font-inter text-xs text-muted-foreground max-w-[200px]">
               {selectedFrame.label} frame · Ready to download
             </p>
 
             <div className="flex gap-2 w-full">
               <button
                 onClick={() => setStep('choose')}
-                className="flex-1 py-2 rounded-xl font-inter text-[0.78rem] font-medium text-muted-foreground bg-white/5 border border-white/10"
+                className="flex-1 py-2 rounded-xl font-inter text-sm font-medium text-muted-foreground bg-white/5 border border-white/10"
               >
                 Change Frame
               </button>
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
-                className={cn("flex-1 py-2 rounded-xl flex items-center justify-center gap-1.5 text-[#0A0A0B] font-inter font-semibold text-[0.78rem] bg-gradient-to-br", selectedFrame.bgGradient)}
+                className={cn("flex-1 py-2 rounded-xl flex items-center justify-center gap-1.5 text-primary-foreground font-inter font-semibold text-sm bg-gradient-to-br", selectedFrame.bgGradient)}
               >
                 <Download size={13} />
                 Download
@@ -291,7 +291,7 @@ export function PhotoModal({ photo, photos, onClose }: PhotoModalProps) {
             <Dialog.Title className="sr-only">Photo details</Dialog.Title>
             <Dialog.Description className="sr-only">View and download photo details or create a sticker.</Dialog.Description>
             <div
-              className="relative w-full max-w-4xl flex flex-col md:flex-row overflow-hidden rounded-2xl bg-[#0f0f12]/95 border border-cyan-primary/20 shadow-[0_0_60px_rgba(0,217,255,0.1),0_32px_64px_rgba(0,0,0,0.6)] max-h-[90vh]"
+              className="relative w-full max-w-4xl flex flex-col md:flex-row overflow-hidden rounded-2xl bg-surface-modal/95 border border-cyan-primary/20 shadow-modal max-h-[90vh]"
             >
               {/* Close button */}
               <Dialog.Close asChild>
@@ -312,7 +312,7 @@ export function PhotoModal({ photo, photos, onClose }: PhotoModalProps) {
                   className="w-full h-full object-cover max-h-[90vh]"
                 />
                 <div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent from-70% to-[#0f0f12]/80"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent from-70% to-surface-modal/80"
                 />
 
                 {/* Prev/Next navigation */}
@@ -336,7 +336,7 @@ export function PhotoModal({ photo, photos, onClose }: PhotoModalProps) {
 
                 {/* Position indicator */}
                 <div
-                  className="absolute bottom-3 left-1/2 -translate-x-1/2 font-mono-tech text-[0.65rem] text-white/50 bg-black/40 px-2 py-[2px] rounded-full"
+                  className="absolute bottom-3 left-1/2 -translate-x-1/2 font-mono-tech text-2xs text-white/50 bg-black/40 px-2 py-[2px] rounded-full"
                 >
                   {currentIdx + 1} / {photos.length}
                 </div>
@@ -353,8 +353,8 @@ export function PhotoModal({ photo, photos, onClose }: PhotoModalProps) {
                       key={tab}
                       onClick={() => setActiveTab(tab)}
                       className={cn(
-                        "flex-1 flex items-center justify-center gap-1.5 py-3 transition-colors font-inter text-[0.75rem] font-medium capitalize border-b-2",
-                        activeTab === tab ? "text-cyan-primary bg-cyan-primary/[0.06] border-cyan-primary" : "text-muted-foreground bg-transparent border-transparent"
+                        "flex-1 flex items-center justify-center gap-1.5 py-3 transition-colors font-inter text-xs font-medium capitalize border-b-2",
+                        activeTab === tab ? "text-cyan-primary bg-cyan-primary/6 border-cyan-primary" : "text-muted-foreground bg-transparent border-transparent"
                       )}
                     >
                       {tab === 'sticker' ? <Sticker size={13} /> : <Calendar size={13} />}
@@ -374,10 +374,10 @@ export function PhotoModal({ photo, photos, onClose }: PhotoModalProps) {
                         exit={{ opacity: 0, x: 8 }}
                         transition={{ duration: 0.18 }}
                       >
-                        <h2 className="mb-1 font-bungee text-[1.1rem] tracking-[-0.02em] text-foreground leading-[1.2]">
+                        <h2 className="mb-1 font-bungee text-lg tracking-[-0.02em] text-foreground leading-[1.2]">
                           {photo.title}
                         </h2>
-                        <p className="mb-4 font-mono-tech text-[0.68rem] text-muted-foreground">
+                        <p className="mb-4 font-mono-tech text-xs text-muted-foreground">
                           by {photo.uploader_id}
                         </p>
 
@@ -389,7 +389,7 @@ export function PhotoModal({ photo, photos, onClose }: PhotoModalProps) {
 
                         {/* Tags */}
                         <div className="mb-4">
-                          <p className="mb-2 font-mono-tech text-[0.6rem] tracking-[0.08em] text-muted-foreground">
+                          <p className="mb-2 font-mono-tech text-2xs tracking-[0.08em] text-muted-foreground">
                             TAGS
                           </p>
                           <div className="flex flex-wrap gap-1.5">
@@ -397,8 +397,8 @@ export function PhotoModal({ photo, photos, onClose }: PhotoModalProps) {
                               <span
                                 key={tag}
                                 className={cn(
-                                  "font-changa text-[0.62rem] tracking-[0.04em] px-2 py-[2px] rounded-full border",
-                                  TAG_COLORS[tag] || "text-cyan-primary bg-cyan-primary/[0.12] border-cyan-primary/[0.2]"
+                                  "font-changa text-2xs tracking-[0.04em] px-2 py-[2px] rounded-full border",
+                                  TAG_COLORS[tag] || "text-cyan-primary bg-cyan-primary/12 border-cyan-primary/20"
                                 )}
                               >
                                 {tag.toUpperCase()}
@@ -417,7 +417,7 @@ export function PhotoModal({ photo, photos, onClose }: PhotoModalProps) {
                           <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.97 }}
-                            className="w-full py-2.5 rounded-xl flex items-center justify-center gap-2 bg-cyan-primary/10 border border-cyan-primary/30 text-cyan-primary font-inter font-medium text-[0.8rem]"
+                            className="w-full py-2.5 rounded-xl flex items-center justify-center gap-2 bg-cyan-primary/10 border border-cyan-primary/30 text-cyan-primary font-inter font-medium text-sm"
                           >
                             <Download size={14} />
                             Download Original
@@ -428,7 +428,7 @@ export function PhotoModal({ photo, photos, onClose }: PhotoModalProps) {
                           onClick={() => setActiveTab('sticker')}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.97 }}
-                          className="w-full mt-2 py-2.5 rounded-xl flex items-center justify-center gap-2 bg-gradient-to-br from-cyan-primary to-cyan-dim text-[#0A0A0B] font-inter font-semibold text-[0.8rem]"
+                          className="w-full mt-2 py-2.5 rounded-xl flex items-center justify-center gap-2 bg-gradient-to-br from-cyan-primary to-cyan-dim text-primary-foreground font-inter font-semibold text-sm"
                         >
                           <Sticker size={14} />
                           Create Sticker
@@ -460,10 +460,10 @@ export function PhotoModal({ photo, photos, onClose }: PhotoModalProps) {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start gap-2">
-      <span className="font-mono-tech text-[0.6rem] tracking-[0.08em] text-muted-foreground min-w-[40px] pt-[1px]">
+      <span className="font-mono-tech text-2xs tracking-[0.08em] text-muted-foreground min-w-[40px] pt-[1px]">
         {label}
       </span>
-      <span className="font-inter text-[0.75rem] text-foreground leading-[1.4]">
+      <span className="font-inter text-xs text-foreground leading-[1.4]">
         {value}
       </span>
     </div>

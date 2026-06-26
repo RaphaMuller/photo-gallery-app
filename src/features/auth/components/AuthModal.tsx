@@ -60,7 +60,7 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
             <Dialog.Description className="sr-only">Faça login na sua conta.</Dialog.Description>
 
             <div
-              className="w-full max-w-sm rounded-2xl overflow-hidden glass-modal shadow-[0_0_80px_rgba(0,217,255,0.08),_0_32px_64px_rgba(0,0,0,0.7)]"
+              className="w-full max-w-sm rounded-2xl overflow-hidden glass-modal shadow-modal-lg"
             >
               {/* Header */}
               <div
@@ -69,7 +69,7 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
                 {/* Logo mark */}
                 <div className="flex flex-col items-center gap-1.5">
                   <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center bg-gradient-to-br from-cyan-primary/20 to-purple-500/20 border border-cyan-primary/30 shadow-[0_0_20px_rgba(0,217,255,0.15)]"
+                    className="w-9 h-9 rounded-xl flex items-center justify-center bg-gradient-to-br from-cyan-primary/20 to-purple-500/20 border border-cyan-primary/30 shadow-glow-cyan-md"
                   >
                     <span className="font-bungee text-base text-cyan-primary">G</span>
                   </div>
@@ -88,7 +88,7 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
               </div>
 
               <div className="p-6 flex flex-col items-center gap-4">
-                <p className="text-[0.85rem] text-muted-foreground text-center font-inter">
+                <p className="text-sm text-muted-foreground text-center font-inter">
                   Conecte-se para acessar a galeria e os eventos exclusivos do grupo.
                 </p>
 
@@ -96,7 +96,7 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
                   <motion.p
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-[0.75rem] w-full text-rose-400 bg-rose-400/10 border border-rose-400/20 rounded-lg px-2.5 py-1.5 text-center"
+                    className="text-xs w-full text-rose-400 bg-rose-400/10 border border-rose-400/20 rounded-lg px-2.5 py-1.5 text-center"
                   >
                     {error}
                   </motion.p>
@@ -108,10 +108,10 @@ export function AuthModal({ open, onClose }: AuthModalProps) {
                   whileHover={!loading ? { scale: 1.02 } : {}}
                   whileTap={!loading ? { scale: 0.97 } : {}}
                   className={cn(
-                    "w-full py-3 rounded-xl flex items-center justify-center gap-3 font-semibold text-[0.85rem] transition-colors",
+                    "w-full py-3 rounded-xl flex items-center justify-center gap-3 font-semibold text-sm transition-colors",
                     loading
                       ? "bg-cyan-primary/15 text-cyan-primary cursor-not-allowed"
-                      : "bg-white text-[#0A0A0B] hover:bg-white/90 shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+                      : "bg-white text-primary-foreground hover:bg-white/90 shadow-glow-white-sm"
                   )}
                 >
                   {loading ? (

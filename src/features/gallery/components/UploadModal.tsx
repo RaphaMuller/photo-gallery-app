@@ -74,7 +74,7 @@ export function UploadModal({ open, onClose, groups, onUploadComplete }: UploadM
             <Dialog.Title className="sr-only">Upload Photos</Dialog.Title>
             <Dialog.Description className="sr-only">Upload your photos to an group.</Dialog.Description>
             <div
-              className="w-full max-w-lg rounded-2xl overflow-hidden bg-[#0f0f12]/95 border border-cyan-primary/20 shadow-[0_0_60px_rgba(0,217,255,0.1),0_32px_64px_rgba(0,0,0,0.6)]"
+              className="w-full max-w-lg rounded-2xl overflow-hidden bg-surface-modal/95 border border-cyan-primary/20 shadow-modal"
             >
               {/* Header */}
               <div
@@ -87,7 +87,7 @@ export function UploadModal({ open, onClose, groups, onUploadComplete }: UploadM
                     <UploadCloud size={15} className="text-cyan-primary" />
                   </div>
                   <h2
-                    className="font-bungee text-[0.95rem] tracking-[-0.01em] text-foreground"
+                    className="font-bungee text-base tracking-[-0.01em] text-foreground"
                   >
                     BATCH UPLOAD
                   </h2>
@@ -108,19 +108,19 @@ export function UploadModal({ open, onClose, groups, onUploadComplete }: UploadM
                   onDragLeave={() => setDragOver(false)}
                   onDrop={handleDrop}
                   onClick={() => inputRef.current?.click()}
-                  className={cn("rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-all py-8 border-2 border-dashed", dragOver ? "border-cyan-primary bg-cyan-primary/[0.06] shadow-[0_0_20px_rgba(0,217,255,0.15)]" : "border-cyan-primary/20 bg-white/[0.02]")}
+                  className={cn("rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-all py-8 border-2 border-dashed", dragOver ? "border-cyan-primary bg-cyan-primary/[0.06] shadow-glow-cyan-md" : "border-cyan-primary/20 bg-white/[0.02]")}
                 >
                   <UploadCloud
                     size={28}
                     className={cn(dragOver ? "text-cyan-primary" : "text-cyan-primary/40")}
                   />
                   <p
-                    className={cn("font-inter text-[0.8rem] font-medium", dragOver ? "text-cyan-primary" : "text-foreground")}
+                    className={cn("font-inter text-sm font-medium", dragOver ? "text-cyan-primary" : "text-foreground")}
                   >
                     Drop photos here or{' '}
                     <span className="text-cyan-primary underline">browse</span>
                   </p>
-                  <p className="font-mono-tech text-[0.65rem] text-muted-foreground">
+                  <p className="font-mono-tech text-2xs text-muted-foreground">
                     JPG, PNG, WEBP — max 20MB each
                   </p>
                   <input
@@ -142,12 +142,12 @@ export function UploadModal({ open, onClose, groups, onUploadComplete }: UploadM
                       <div key={i} className="flex items-center gap-2">
                         <Image size={13} className="text-muted-foreground shrink-0" />
                         <span
-                          className="flex-1 truncate font-mono-tech text-[0.68rem] text-foreground"
+                          className="flex-1 truncate font-mono-tech text-xs text-foreground"
                         >
                           {file.name}
                         </span>
                         <span
-                          className="font-mono-tech text-[0.62rem] text-muted-foreground"
+                          className="font-mono-tech text-2xs text-muted-foreground"
                         >
                           {(file.size / 1024 / 1024).toFixed(1)}MB
                         </span>
@@ -162,7 +162,7 @@ export function UploadModal({ open, onClose, groups, onUploadComplete }: UploadM
                 {/* Group select */}
                 <div>
                   <p
-                    className="mb-2 font-mono-tech text-[0.62rem] tracking-[0.08em] text-muted-foreground"
+                    className="mb-2 font-mono-tech text-2xs tracking-[0.08em] text-muted-foreground"
                   >
                     ADD TO ALBUM
                   </p>
@@ -171,7 +171,7 @@ export function UploadModal({ open, onClose, groups, onUploadComplete }: UploadM
                       <button
                         key={group.id}
                         onClick={() => { setSelectedGroup(group.id); setCreatingGroup(false); }}
-                        className={cn("px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors font-inter text-[0.75rem] border", selectedGroup === group.id && !creatingGroup ? "bg-cyan-primary/15 border-cyan-primary text-cyan-primary" : "bg-white/[0.04] border-white/10 text-muted-foreground hover:bg-white/[0.08]")}
+                        className={cn("px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors font-inter text-xs border", selectedGroup === group.id && !creatingGroup ? "bg-cyan-primary/15 border-cyan-primary text-cyan-primary" : "bg-white/[0.04] border-white/10 text-muted-foreground hover:bg-white/[0.08]")}
                       >
                         {selectedGroup === group.id && !creatingGroup && <Check size={11} />}
                         {group.name}
@@ -179,7 +179,7 @@ export function UploadModal({ open, onClose, groups, onUploadComplete }: UploadM
                     ))}
                     <button
                       onClick={() => setCreatingGroup(true)}
-                      className={cn("px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors font-inter text-[0.75rem] border", creatingGroup ? "bg-cyan-primary/15 border-cyan-primary text-cyan-primary" : "bg-white/[0.04] border-white/10 text-muted-foreground hover:bg-white/[0.08]")}
+                      className={cn("px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors font-inter text-xs border", creatingGroup ? "bg-cyan-primary/15 border-cyan-primary text-cyan-primary" : "bg-white/[0.04] border-white/10 text-muted-foreground hover:bg-white/[0.08]")}
                     >
                       <FolderPlus size={12} />
                       New Group
@@ -199,10 +199,10 @@ export function UploadModal({ open, onClose, groups, onUploadComplete }: UploadM
                           placeholder="Group name..."
                           value={newGroupName}
                           onChange={(e) => setNewGroupName(e.target.value)}
-                          className="flex-1 px-3 py-1.5 rounded-lg outline-none font-inter text-[0.8rem] bg-white/[0.06] border border-cyan-primary/20 text-foreground focus:border-cyan-primary/50 transition-colors"
+                          className="flex-1 px-3 py-1.5 rounded-lg outline-none font-inter text-sm bg-white/[0.06] border border-cyan-primary/20 text-foreground focus:border-cyan-primary/50 transition-colors"
                         />
                         <button
-                          className="px-3 py-1.5 rounded-lg flex items-center gap-1 bg-gradient-to-br from-cyan-primary to-cyan-dim text-[#0A0A0B] font-inter text-[0.78rem] font-semibold"
+                          className="px-3 py-1.5 rounded-lg flex items-center gap-1 bg-gradient-to-br from-cyan-primary to-cyan-dim text-primary-foreground font-inter text-sm font-semibold"
                         >
                           <Plus size={13} />
                           Create
@@ -218,7 +218,7 @@ export function UploadModal({ open, onClose, groups, onUploadComplete }: UploadM
                   disabled={!selectedFiles.length || uploading}
                   whileHover={selectedFiles.length && !uploading ? { scale: 1.02 } : {}}
                   whileTap={selectedFiles.length && !uploading ? { scale: 0.97 } : {}}
-                  className={cn("w-full py-3 rounded-xl flex items-center justify-center gap-2 font-inter font-semibold text-[0.85rem] transition-all duration-300", done ? "bg-gradient-to-br from-emerald-400 to-emerald-500 text-[#0A0A0B]" : selectedFiles.length && !uploading ? "bg-gradient-to-br from-cyan-primary to-cyan-dim text-[#0A0A0B] cursor-pointer" : "bg-white/[0.06] text-muted-foreground cursor-not-allowed")}
+                  className={cn("w-full py-3 rounded-xl flex items-center justify-center gap-2 font-inter font-semibold text-sm transition-all duration-300", done ? "bg-gradient-to-br from-emerald-400 to-emerald-500 text-primary-foreground" : selectedFiles.length && !uploading ? "bg-gradient-to-br from-cyan-primary to-cyan-dim text-primary-foreground cursor-pointer" : "bg-white/[0.06] text-muted-foreground cursor-not-allowed")}
                 >
                   {done ? (
                     <>
