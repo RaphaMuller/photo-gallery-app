@@ -30,11 +30,6 @@
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: rgba(0, 217, 255, 0.5);
-  --chart-1: #00D9FF;
-  --chart-2: #00A8CC;
-  --chart-3: #7B5EA7;
-  --chart-4: #FF6B6B;
-  --chart-5: #4ECDC4;
   --radius: 0.75rem;
   --sidebar: #111114;
   --sidebar-foreground: #E8E8EA;
@@ -112,11 +107,18 @@
   --color-input-background: var(--input-background);
   --color-switch-background: var(--switch-background);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+
+  /* Neon palette — base swatches used by hand across the app.
+     Replaces the orphaned --chart-1..5 tokens. */
+  --color-neon-cyan: #00D9FF;
+  --color-neon-cyan-dim: #00A8CC;
+  --color-neon-purple: #a78bfa;
+  --color-neon-rose: #fb7185;
+  --color-neon-amber: #fbbf24;
+  --color-neon-teal: #4ECDC4;
+  --color-neon-green: #34d399;
+  --color-neon-indigo: #818cf8;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -134,6 +136,44 @@
   --font-changa: 'Changa One', sans-serif;
   --font-mono-tech: 'Share Tech Mono', monospace;
   --font-inter: 'Inter', sans-serif;
+
+  /* Semantic color aliases — domains draw from the neon palette.
+     Event colors match the `color` field in EVENTS (data.ts). */
+  --color-event-cyan: var(--color-neon-cyan);
+  --color-event-purple: var(--color-neon-purple);
+  --color-event-rose: var(--color-neon-rose);
+  --color-event-amber: var(--color-neon-amber);
+  --color-event-teal: var(--color-neon-teal);
+
+  --color-tag-cyan: var(--color-neon-cyan);
+  --color-tag-purple: var(--color-neon-purple);
+  --color-tag-rose: var(--color-neon-rose);
+  --color-tag-amber: var(--color-neon-amber);
+  --color-tag-teal: var(--color-neon-teal);
+  --color-tag-green: var(--color-neon-green);
+  --color-tag-indigo: var(--color-neon-indigo);
+
+  --color-frame-cyan: var(--color-neon-cyan);
+  --color-frame-purple: var(--color-neon-purple);
+  --color-frame-rose: var(--color-neon-rose);
+  --color-frame-amber: var(--color-neon-amber);
+  --color-frame-teal: var(--color-neon-teal);
+
+  /* Typography micro-scale — additive to Tailwind's defaults.
+     Covers the sub-xs arbitrary sizes (text-[0.55rem]..text-[0.7rem])
+     and the hero heading (text-[3.5rem]). xs/sm/base/lg cover 0.72..1.1. */
+  --text-3xs: 0.5625rem; /* 9px  */
+  --text-2xs: 0.625rem;  /* 10px */
+  --text-hero: 3.5rem;   /* 56px */
+
+  /* Glow shadows — recurring cyan glows, hardcoded today as
+     shadow-[0_0_*px_rgba(0,217,255,*)]. Per-color glows stay per-component. */
+  --shadow-glow-xs: 0 0 6px rgba(0, 217, 255, 0.5);
+  --shadow-glow-sm: 0 0 12px rgba(0, 217, 255, 0.5);
+  --shadow-glow-md: 0 0 20px rgba(0, 217, 255, 0.3), 0 0 40px rgba(0, 217, 255, 0.15);
+  --shadow-glow-lg: 0 0 24px rgba(0, 217, 255, 0.5), 0 0 48px rgba(0, 217, 255, 0.25);
+  --shadow-glow-card: 0 0 24px rgba(0, 217, 255, 0.2), 0 0 48px rgba(0, 217, 255, 0.08), inset 0 0 24px rgba(0, 217, 255, 0.04);
+  --shadow-glow-hero: 0 0 80px rgba(0, 217, 255, 0.08), 0 32px 64px rgba(0, 0, 0, 0.7);
 }
 
 @layer base {
