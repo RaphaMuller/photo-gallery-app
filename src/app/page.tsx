@@ -15,6 +15,11 @@ export default function LandingPage() {
   const [error, setError] = useState<string | null>(null);
 
   const handleGoogleLogin = async () => {
+    // Dev/demo bypass: skip OAuth, go straight to the gallery.
+    if (process.env.NEXT_PUBLIC_BYPASS_AUTH === 'true') {
+      window.location.href = '/gallery';
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
