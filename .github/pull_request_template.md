@@ -12,23 +12,23 @@
 
 ## Purpose
 
-<!-- Why is this change necessary? What problem does it solve? -->
+<!-- Por que essa mudança é necessária? Que problema resolve? -->
 
 ## Details
 
-<!-- What exactly changed and why. Subtleties a reviewer might miss. Notable risks. -->
+<!-- O que exatamente mudou e por quê. Sutilezas que o revisor pode não notar. Riscos relevantes. -->
 
 ## Pre-Submission Checklist
 
-- [ ] `npm run build` passes (includes TypeScript)
-- [ ] `npm run lint` clean
-- [ ] No `any`; no `style={{...}}` for color/bg/border/filter (Glassmorphism via utilities + `cn()`)
-- [ ] Files grouped by feature (FSD)
+- [ ] `npm run build` passa (inclui TypeScript)
+- [ ] `npm run lint` limpo
+- [ ] Sem `any`; sem `style={{...}}` para cor/bg/borda/filtro (Glassmorphism via utilities + `cn()`)
+- [ ] Arquivos agrupados por feature (FSD)
 
 ## Verify and Review
 
-<!-- Frontend steps to test: route/view, what to click, expected result. Code examples if useful. -->
+<!-- Passos de teste no front: rota/tela, o que clicar, resultado esperado. Exemplos de código se útil. -->
 
 ## References
 
-<!-- links or related files; add `Linear: ABC-123` if applicable -->
+<!-- links ou arquivos relacionados; adicione `Linear: ABC-123` se aplicável -->

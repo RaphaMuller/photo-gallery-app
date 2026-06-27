@@ -11,9 +11,10 @@ argument-hint: "[--draft] [base-branch]"
 Create a GitHub pull request for the current branch in **photo-gallery-app**
 (Next.js + Feature-Sliced Design), using the PR template below.
 
-PR title and body are written in **normal English** (Conventional-Commits style
-for the title), regardless of caveman mode — same rule the repo follows for
-commits and PRs.
+The PR **body is written in pt-BR** (normal prose, not caveman). The **title**
+stays in Conventional-Commits style (keep the English type keyword: `feat`,
+`fix`, `chore`, `refactor`…; the rest may be pt-BR). This holds regardless of
+caveman mode.
 
 ## Arguments
 
@@ -138,30 +139,30 @@ Use `$BASE_BRANCH` and `$DRAFT_FLAG` in all git commands below.
    gh pr create --base $BASE_BRANCH $DRAFT_FLAG --title "$TITLE" --body "$(cat <<'EOF'
    ## Parts of Code Affected
 
-   - [x] [e.g. features/gallery]
+   - [x] [ex.: features/gallery]
 
    ## Purpose
 
-   [Why is this change necessary? What problem does it solve?]
+   [Por que essa mudança é necessária? Que problema resolve?]
 
    ## Details
 
-   [What exactly changed and why. Subtleties a reviewer might miss. Notable risks.]
+   [O que exatamente mudou e por quê. Sutilezas que o revisor pode não notar. Riscos relevantes.]
 
    ## Pre-Submission Checklist
 
-   - [ ] `npm run build` passes (includes TypeScript)
-   - [ ] `npm run lint` clean
-   - [ ] No `any`; no `style={{...}}` for color/bg/border/filter (Glassmorphism via utilities + `cn()`)
-   - [ ] Files grouped by feature (FSD)
+   - [ ] `npm run build` passa (inclui TypeScript)
+   - [ ] `npm run lint` limpo
+   - [ ] Sem `any`; sem `style={{...}}` para cor/bg/borda/filtro (Glassmorphism via utilities + `cn()`)
+   - [ ] Arquivos agrupados por feature (FSD)
 
    ## Verify and Review
 
-   [Frontend steps to test: route/view, what to click, expected result. Code examples if useful.]
+   [Passos de teste no front: rota/tela, o que clicar, resultado esperado. Exemplos de código se útil.]
 
    ## References
 
-   - [links or related files; add `Linear: ABC-123` if found, else remove]
+   - [links ou arquivos relacionados; adicione `Linear: ABC-123` se houver, senão remova]
    EOF
    )"
    ```
@@ -174,7 +175,7 @@ Use `$BASE_BRANCH` and `$DRAFT_FLAG` in all git commands below.
 - In "Parts of Code Affected", list only touched slices.
 - Keep Purpose concise; surface real risks in Details.
 - "Verify and Review" should be runnable steps for a reviewer, not vague.
-- PR title/body in normal English even under caveman mode.
+- PR body in pt-BR; title in Conventional-Commits style (English type keyword). Holds even under caveman mode.
 
 ## Example Usage
 
