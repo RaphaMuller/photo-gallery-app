@@ -103,19 +103,7 @@ Use `$BASE_BRANCH` and `$DRAFT_FLAG` in all git commands below.
    git push -u origin "$CURRENT_BRANCH"
    ```
 
-6. **Extract Linear issue ID (if present)** for References:
-
-   ```bash
-   LINEAR_ID=$(echo "$CURRENT_BRANCH" | grep -oE '[A-Z]+-[0-9]+' | head -1)
-   if [ -z "$LINEAR_ID" ]; then
-     LINEAR_ID=$(git log $BASE_BRANCH...HEAD --format="%s" | grep -oE '[A-Z]+-[0-9]+' | head -1)
-   fi
-   ```
-
-   If found, add `- Linear: ABC-123` under References. Branches here often have
-   no Linear ID (e.g. `feat/t1-tokens-theme`) — that's fine.
-
-7. **Verify build and lint** so the checklist is honest (do not guess):
+6. **Verify build and lint** so the checklist is honest (do not guess):
 
    ```bash
    npm run build   # Next.js build also runs TypeScript — this is the type check
@@ -124,14 +112,14 @@ Use `$BASE_BRANCH` and `$DRAFT_FLAG` in all git commands below.
 
    This repo has **no test runner** — don't claim tests unless one was added.
 
-8. **Generate a title** from the branch name (or summarize the changes),
+7. **Generate a title** from the branch name (or summarize the changes),
    preferring the Conventional-Commits style of the lead commit:
 
    ```bash
    TITLE=$(echo "$CURRENT_BRANCH" | sed 's/^[^/]*\///' | sed 's/-/ /g' | sed 's/^./\U&/')
    ```
 
-9. **Create the PR** with the template below. Fill every section from your
+8. **Create the PR** with the template below. Fill every section from your
    analysis and **replace all bracketed placeholders** — leave nothing blank or
    templated:
 
@@ -162,16 +150,16 @@ Use `$BASE_BRANCH` and `$DRAFT_FLAG` in all git commands below.
 
    ## References
 
-   - [links ou arquivos relacionados; adicione `Linear: ABC-123` se houver, senão remova]
+   - [links ou arquivos relacionados;]
    EOF
    )"
    ```
 
-10. **Output the PR URL** when complete.
+9. **Output the PR URL** when complete.
 
 ## Important Notes
 
-- Tick checklist boxes only for what you actually verified (step 7).
+- Tick checklist boxes only for what you actually verified (step 6).
 - In "Parts of Code Affected", list only touched slices.
 - Keep Purpose concise; surface real risks in Details.
 - "Verify and Review" should be runnable steps for a reviewer, not vague.
@@ -193,3 +181,15 @@ Use `$BASE_BRANCH` and `$DRAFT_FLAG` in all git commands below.
 - **Push fails**: upstream conflict or force-push divergence — ask the user how to proceed.
 - **On base branch**: tell the user to create a feature branch first.
 - **Build/lint fails**: report it and ask whether to open the PR anyway (draft) or fix first.
+- **`gh pr edit --body` does nothing (body stays unchanged)**: this repo trips
+  the deprecated Projects-classic GraphQL path, so `gh pr edit` fails silently
+  with a `Projects (classic) is being deprecated … projectCards` warning. Edit
+  the body via REST instead (write the body to a file first to avoid quoting
+  issues):
+
+  ```bash
+  gh api -X PATCH repos/RaphaMuller/photo-gallery-app/pulls/<NUMBER> \
+    -f body="$(cat path/to/body.md)"
+  ```
+
+  `gh pr create` is unaffected — only the edit path needs the REST fallback.
