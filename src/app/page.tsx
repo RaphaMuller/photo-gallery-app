@@ -15,6 +15,11 @@ export default function LandingPage() {
   const [error, setError] = useState<string | null>(null);
 
   const handleGoogleLogin = async () => {
+    // Dev/demo bypass: skip OAuth, go straight to the gallery.
+    if (process.env.NEXT_PUBLIC_BYPASS_AUTH === 'true') {
+      window.location.href = '/gallery';
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
@@ -36,7 +41,7 @@ export default function LandingPage() {
   const displayPhotos = [...PHOTOS.slice(0, 8), ...PHOTOS.slice(0, 8)];
 
   return (
-    <div className="flex flex-col lg:grid lg:grid-cols-2 min-h-screen overflow-hidden bg-gradient-to-br from-[#1B1B1E] via-[#0D0D10] to-[#0A0A0B] font-inter">
+    <div className="flex flex-col lg:grid lg:grid-cols-2 min-h-screen overflow-hidden bg-app-gradient font-inter">
       
       {/* Efeitos de fundo (Lado Esquerdo e Geral) */}
       <div className="pointer-events-none fixed inset-0 z-0">
@@ -54,7 +59,7 @@ export default function LandingPage() {
           className="w-full max-w-[40rem] min-h-[600px] p-4 md:p-10 flex flex-col items-start justify-center text-left bg-transparent"
         >
           {/* Nova Logo Alinhada à Esquerda */}
-          <div className="w-20 h-20 mb-8 rounded-3xl overflow-hidden relative shadow-[0_0_40px_rgba(0,217,255,0.15)] border border-cyan-400/20 ring-1 ring-cyan-500/20">
+          <div className="w-20 h-20 mb-8 rounded-3xl overflow-hidden relative shadow-glow-cyan-lg border border-cyan-400/20 ring-1 ring-cyan-500/20">
             <Image 
               src="/logo.png" 
               alt="Neon Camera Logo" 
@@ -65,18 +70,18 @@ export default function LandingPage() {
           </div>
 
           {/* Headline */}
-          <h1 className="font-inter font-black text-4xl md:text-5xl lg:text-[3.5rem] text-foreground tracking-tight leading-[1.1]">
+          <h1 className="font-inter font-black text-4xl md:text-5xl lg:text-hero text-foreground tracking-tight leading-[1.1]">
             Eternize Seus <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">Momentos.</span>
           </h1>
           
-          <p className="text-muted-foreground mt-6 mb-10 text-[1.05rem] leading-relaxed max-w-[28rem] pl-1 border-l-2 border-cyan-500/30 ml-1">
+          <p className="text-muted-foreground mt-6 mb-10 text-base leading-relaxed max-w-[28rem] pl-1 border-l-2 border-cyan-500/30 ml-1">
             Um espaço privado e moderno para organizar, visualizar e compartilhar suas fotos e eventos.
           </p>
 
           {/* Botão de Login */}
           <div className="flex flex-col w-full max-w-[22rem]">
             {error && (
-              <p className="text-[0.8rem] w-full text-rose-400 bg-rose-400/10 border border-rose-400/20 rounded-xl px-3 py-3 mb-4">
+              <p className="text-sm w-full text-rose-400 bg-rose-400/10 border border-rose-400/20 rounded-xl px-3 py-3 mb-4">
                 {error}
               </p>
             )}
@@ -87,10 +92,10 @@ export default function LandingPage() {
               whileHover={!loading ? { scale: 1.03 } : {}}
               whileTap={!loading ? { scale: 0.98 } : {}}
               className={cn(
-                "w-full py-4 rounded-2xl flex items-center justify-center gap-3 font-bold text-[0.95rem] transition-colors",
+                "w-full py-4 rounded-2xl flex items-center justify-center gap-3 font-bold text-base transition-colors",
                 loading
                   ? "bg-cyan-primary/15 text-cyan-primary cursor-not-allowed border border-cyan-primary/20"
-                  : "bg-white text-[#0A0A0B] hover:bg-white/90 shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+                  : "bg-white text-primary-foreground hover:bg-white/90 shadow-glow-white-md"
               )}
             >
               {loading ? (
@@ -111,7 +116,7 @@ export default function LandingPage() {
               )}
             </motion.button>
             
-            <div className="mt-10 font-inter text-[0.75rem] text-muted-foreground/50 leading-relaxed">
+            <div className="mt-10 font-inter text-xs text-muted-foreground/50 leading-relaxed">
               <p>&copy; {new Date().getFullYear()} Galeria Fotográfica.</p>
               <p>Autenticado com segurança pelo Supabase.</p>
             </div>
@@ -123,8 +128,8 @@ export default function LandingPage() {
       <div className="relative z-0 h-[50vh] lg:h-screen w-full overflow-hidden bg-black/20 group">
         
         {/* Gradientes Superior e Inferior para esmaecer a galeria nas bordas */}
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#0A0A0B] to-transparent z-10 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0A0A0B] to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-surface-deep to-transparent z-10 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-surface-deep to-transparent z-10 pointer-events-none" />
 
         <motion.div
           animate={{ y: ["0%", "-50%"] }}
@@ -140,7 +145,7 @@ export default function LandingPage() {
               <div 
                 key={`${photo.id}-${i}`}
                 className={cn(
-                  "relative rounded-3xl overflow-hidden glass-card transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(0,217,255,0.4)] hover:z-20 cursor-pointer",
+                  "relative rounded-3xl overflow-hidden glass-card transition-all duration-500 hover:scale-105 hover:shadow-glow-cyan-strong hover:z-20 cursor-pointer",
                   i % 3 === 0 ? "aspect-[4/5]" : "aspect-square"
                 )}
               >

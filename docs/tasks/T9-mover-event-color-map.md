@@ -18,3 +18,9 @@ Mover `EVENT_COLOR_MAP` pra `lib/theme` (derivado da palette de T2). `data.ts` f
 - `data.ts` só contém dado.
 - Color map de evento mora no `lib/theme`, derivado da fonte canônica.
 - Eventos renderizam igual.
+
+## Status: parcial (valores tokenizados, não movido)
+
+No T1, o `EVENT_COLOR_MAP` em `data.ts` teve os valores trocados por tokens (`bg-cyan-primary/12`, `shadow-glow-xs-rose`, etc.) — sem hex hardcoded.
+
+**Ainda pendente:** o mapa **continua em `data.ts`**, misturado com o seed mock. Falta mover pra `lib/theme` (depende do T2). `EventsPanel` e `EventFormModal` ainda importam de `@/constants/data`.

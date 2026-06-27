@@ -23,7 +23,7 @@ export function NavBar({ searchQuery, onSearchChange, onUploadClick, activeView,
         <div className="w-7 h-7 rounded flex items-center justify-center bg-cyan-primary/10 border border-cyan-primary/30">
           <Camera size={15} className="text-cyan-primary" />
         </div>
-        <span className="font-bungee tracking-tight select-none hidden sm:block text-[0.9rem] text-foreground">
+        <span className="font-bungee tracking-tight select-none hidden sm:block text-sm text-foreground">
           PHOTO<span className="text-cyan-primary">VAULT</span>
         </span>
       </div>
@@ -35,7 +35,7 @@ export function NavBar({ searchQuery, onSearchChange, onUploadClick, activeView,
             key={view}
             onClick={() => onViewChange(view)}
             className={cn(
-              "relative px-3 py-1 rounded-md transition-colors font-inter text-[0.8rem] font-medium capitalize",
+              "relative px-3 py-1 rounded-md transition-colors font-inter text-sm font-medium capitalize",
               activeView === view ? "text-cyan-primary bg-cyan-primary/10" : "text-muted-foreground bg-transparent"
             )}
           >
@@ -72,7 +72,7 @@ export function NavBar({ searchQuery, onSearchChange, onUploadClick, activeView,
           placeholder="Search photos..."
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full pl-8 pr-8 py-1.5 rounded-lg text-[0.8rem] glass-input"
+          className="w-full pl-8 pr-8 py-1.5 rounded-lg text-sm glass-input"
         />
         {searchQuery && (
           <button
@@ -90,7 +90,7 @@ export function NavBar({ searchQuery, onSearchChange, onUploadClick, activeView,
           onClick={onUploadClick}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg shrink-0 bg-gradient-to-br from-cyan-primary to-cyan-dim text-[#0A0A0B] font-inter text-[0.8rem] font-semibold"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg shrink-0 bg-gradient-to-br from-cyan-primary to-cyan-dim text-primary-foreground font-inter text-sm font-semibold"
         >
           <Upload size={13} />
           <span className="hidden sm:inline">Upload</span>
@@ -104,7 +104,7 @@ export function NavBar({ searchQuery, onSearchChange, onUploadClick, activeView,
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           title={`Sair (${user.email})`}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg shrink-0 bg-white/5 border border-white/10 text-muted-foreground font-inter text-[0.8rem] font-medium hover:bg-white/10 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg shrink-0 bg-white/5 border border-white/10 text-muted-foreground font-inter text-sm font-medium hover:bg-white/10 transition-colors"
         >
           <LogOut size={13} />
           <span className="hidden sm:inline">Sair</span>
@@ -114,7 +114,7 @@ export function NavBar({ searchQuery, onSearchChange, onUploadClick, activeView,
           onClick={onLoginClick}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg shrink-0 bg-cyan-primary/10 border border-cyan-primary/25 text-cyan-primary font-inter text-[0.8rem] font-medium hover:bg-cyan-primary/20 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg shrink-0 bg-cyan-primary/10 border border-cyan-primary/25 text-cyan-primary font-inter text-sm font-medium hover:bg-cyan-primary/20 transition-colors"
         >
           <LogIn size={13} />
           <span className="hidden sm:inline">Entrar</span>

@@ -9,11 +9,10 @@ interface LoadingSpinnerProps {
 export function LoadingSpinner({ className, size = 24 }: LoadingSpinnerProps) {
   return (
     <motion.div
-      className={cn("rounded-full border-2 border-cyan-primary/20", className)}
+      className={cn("rounded-full border-2 border-cyan-primary/20 border-t-cyan-primary/90", className)}
       style={{
         width: size,
         height: size,
-        borderTopColor: 'rgba(0,217,255,0.9)',
       }}
       animate={{ rotate: 360 }}
       transition={{

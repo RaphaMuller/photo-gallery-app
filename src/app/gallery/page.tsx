@@ -85,42 +85,14 @@ export default function Page() {
   };
 
   return (
-    <div
-      className="flex flex-col h-screen overflow-hidden"
-      style={{
-        background: 'linear-gradient(160deg, #1B1B1E 0%, #0D0D10 50%, #0A0A0B 100%)',
-        fontFamily: 'Inter, sans-serif',
-      }}
-    >
+    <div className="flex flex-col h-screen overflow-hidden bg-app-gradient font-inter">
       {/* Ambient background glows */}
       <div
         className="pointer-events-none fixed inset-0 z-0"
         aria-hidden="true"
       >
-        <div
-          className="absolute"
-          style={{
-            top: '-10%',
-            right: '-5%',
-            width: 500,
-            height: 500,
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(0,217,255,0.04) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-          }}
-        />
-        <div
-          className="absolute"
-          style={{
-            bottom: '-10%',
-            left: '-5%',
-            width: 400,
-            height: 400,
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(123,94,167,0.05) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-          }}
-        />
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full ambient-glow-cyan" />
+        <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full ambient-glow-purple" />
       </div>
 
       {/* Nav */}
@@ -149,10 +121,7 @@ export default function Page() {
       {/* Main content */}
       <div className="flex flex-1 min-h-0 relative z-10">
         {/* Gallery column */}
-        <main
-          className="flex-1 overflow-y-auto px-4 pt-4 pb-8 lg:px-5"
-          style={{ minWidth: 0 }}
-        >
+        <main className="flex-1 min-w-0 overflow-y-auto px-4 pt-4 pb-8 lg:px-5">
           {activeView === 'gallery' ? (
             <PhotoGallery
               photos={filteredPhotos}
@@ -167,13 +136,7 @@ export default function Page() {
         </main>
 
         {/* Events sidebar — desktop only */}
-        <aside
-          className="hidden lg:flex flex-col w-72 overflow-y-auto px-4 pt-4 pb-8 shrink-0"
-          style={{
-            borderLeft: '1px solid rgba(0,217,255,0.08)',
-            background: 'rgba(10,10,11,0.4)',
-          }}
-        >
+        <aside className="hidden lg:flex flex-col w-72 overflow-y-auto px-4 pt-4 pb-8 shrink-0 border-l border-cyan-primary/8 bg-surface-deep/40">
           <EventsPanel
             events={events}
             onNewEvent={() => setEventFormOpen(true)}

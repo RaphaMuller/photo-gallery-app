@@ -30,11 +30,6 @@
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: rgba(0, 217, 255, 0.5);
-  --chart-1: #00D9FF;
-  --chart-2: #00A8CC;
-  --chart-3: #7B5EA7;
-  --chart-4: #FF6B6B;
-  --chart-5: #4ECDC4;
   --radius: 0.75rem;
   --sidebar: #111114;
   --sidebar-foreground: #E8E8EA;
@@ -55,6 +50,7 @@
   --glass-hover-border: rgba(0, 217, 255, 0.4);
   --glass-hover-shadow: 0 0 24px rgba(0, 217, 255, 0.25), 0 0 48px rgba(0, 217, 255, 0.1), inset 0 0 24px rgba(0, 217, 255, 0.04);
   --page-bg-from: #1B1B1E;
+  --page-bg-mid: #0D0D10;
   --page-bg-to: #0A0A0B;
 }
 
@@ -112,11 +108,28 @@
   --color-input-background: var(--input-background);
   --color-switch-background: var(--switch-background);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+
+  /* Neon brand palette — the swatches used by hand across the app.
+     Registered as real color tokens so bg-/text-/border-/from- utilities
+     resolve (previously bg-cyan-primary/border-cyan-primary were unregistered
+     no-ops). Replaces the orphaned --chart-1..5 tokens. */
+  /* Literal hex (not var(--cyan)): in @theme inline, an opacity modifier like
+     bg-cyan-primary/12 only works when the token is a literal color — a var()
+     reference makes Tailwind drop the opacity and render full strength. */
+  --color-cyan-primary: #00D9FF;
+  --color-cyan-dim: #00A8CC;
+  --color-purple: #a78bfa;
+  --color-rose: #fb7185;
+  --color-amber: #fbbf24;
+  --color-teal: #4ECDC4;
+  --color-green: #34d399;
+  --color-indigo: #818cf8;
+
+  /* Near-black surfaces, repeated as bg-[#...] across modals/cards/page. */
+  --color-surface-modal: #0f0f12;
+  --color-surface-card: #14141a;
+  --color-surface-deep: #0a0a0b;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -134,6 +147,47 @@
   --font-changa: 'Changa One', sans-serif;
   --font-mono-tech: 'Share Tech Mono', monospace;
   --font-inter: 'Inter', sans-serif;
+
+  /* Typography micro-scale — additive to Tailwind's defaults.
+     Covers the sub-xs arbitrary sizes (text-[0.55rem]..text-[0.65rem])
+     and the hero heading (text-[3.5rem]). xs/sm/base/lg cover 0.68..1.1. */
+  --text-3xs: 0.5625rem; /* 9px  */
+  --text-2xs: 0.625rem;  /* 10px */
+  --text-hero: 3.5rem;   /* 56px */
+
+  /* Per-color glow tokens — kill the repeated shadow-[0_0_*px_rgba(c,*)].
+     xs = dot (event), sm = marker (sticker small), lg = halo (sticker large). */
+  --shadow-glow-xs-cyan: 0 0 6px rgba(0, 217, 255, 0.5);
+  --shadow-glow-xs-purple: 0 0 6px rgba(167, 139, 250, 0.5);
+  --shadow-glow-xs-rose: 0 0 6px rgba(251, 113, 133, 0.5);
+  --shadow-glow-xs-amber: 0 0 6px rgba(251, 191, 36, 0.5);
+  --shadow-glow-xs-teal: 0 0 6px rgba(78, 205, 196, 0.5);
+
+  --shadow-glow-sm-cyan: 0 0 12px rgba(0, 217, 255, 0.5);
+  --shadow-glow-sm-purple: 0 0 12px rgba(167, 139, 250, 0.5);
+  --shadow-glow-sm-rose: 0 0 12px rgba(251, 113, 133, 0.5);
+  --shadow-glow-sm-amber: 0 0 12px rgba(251, 191, 36, 0.5);
+  --shadow-glow-sm-teal: 0 0 12px rgba(78, 205, 196, 0.5);
+  --shadow-glow-sm-green: 0 0 12px rgba(52, 211, 153, 0.5);
+
+  --shadow-glow-lg-cyan: 0 0 24px rgba(0, 217, 255, 0.5), 0 0 48px rgba(0, 217, 255, 0.25);
+  --shadow-glow-lg-purple: 0 0 24px rgba(167, 139, 250, 0.5), 0 0 48px rgba(167, 139, 250, 0.25);
+  --shadow-glow-lg-rose: 0 0 24px rgba(251, 113, 133, 0.5), 0 0 48px rgba(251, 113, 133, 0.25);
+  --shadow-glow-lg-amber: 0 0 24px rgba(251, 191, 36, 0.5), 0 0 48px rgba(251, 191, 36, 0.25);
+  --shadow-glow-lg-teal: 0 0 24px rgba(78, 205, 196, 0.5), 0 0 48px rgba(78, 205, 196, 0.25);
+  --shadow-glow-lg-green: 0 0 24px rgba(52, 211, 153, 0.5), 0 0 48px rgba(52, 211, 153, 0.25);
+
+  /* Structural cyan/white glows — recurring across cards, modals, buttons. */
+  --shadow-glow-cyan-sm: 0 0 15px rgba(0, 217, 255, 0.15);
+  --shadow-glow-cyan-md: 0 0 20px rgba(0, 217, 255, 0.15);
+  --shadow-glow-cyan-lg: 0 0 40px rgba(0, 217, 255, 0.15);
+  --shadow-glow-cyan-strong: 0 0 40px rgba(0, 217, 255, 0.4);
+  --shadow-glow-white-sm: 0 0 15px rgba(255, 255, 255, 0.2);
+  --shadow-glow-white-md: 0 0 30px rgba(255, 255, 255, 0.15);
+  --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.4);
+  --shadow-card-glow: 0 0 24px rgba(0, 217, 255, 0.2), 0 0 48px rgba(0, 217, 255, 0.08), inset 0 0 24px rgba(0, 217, 255, 0.03);
+  --shadow-modal: 0 0 60px rgba(0, 217, 255, 0.1), 0 32px 64px rgba(0, 0, 0, 0.6);
+  --shadow-modal-lg: 0 0 80px rgba(0, 217, 255, 0.08), 0 32px 64px rgba(0, 0, 0, 0.7);
 }
 
 @layer base {
@@ -241,13 +295,6 @@
     box-shadow: var(--glass-hover-shadow);
   }
 
-  .glass-panel {
-    background: rgba(15, 15, 18, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 217, 255, 0.1);
-  }
-
   .glass-nav {
     background: rgba(10, 10, 11, 0.85);
     backdrop-filter: blur(20px);
@@ -281,12 +328,32 @@
     background: rgba(0, 217, 255, 0.08);
   }
 
-  .cyan-glow {
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.3), 0 0 40px rgba(0, 217, 255, 0.15);
+  /* App background — single source for the 3-stop page gradient.
+     Replaces the divergent inline gradient on the gallery page and the
+     from-/via-/to- arbitrary hexes on the landing page. */
+  .bg-app-gradient {
+    background: linear-gradient(
+      160deg,
+      var(--page-bg-from) 0%,
+      var(--page-bg-mid) 50%,
+      var(--page-bg-to) 100%
+    );
   }
 
-  .text-cyan-primary {
-    color: var(--cyan);
+  /* Ambient radial glows behind page content (was 100% inline style). */
+  .ambient-glow-cyan {
+    background: radial-gradient(circle, rgba(0, 217, 255, 0.04) 0%, transparent 70%);
+    filter: blur(40px);
+  }
+
+  .ambient-glow-purple {
+    background: radial-gradient(circle, rgba(123, 94, 167, 0.05) 0%, transparent 70%);
+    filter: blur(40px);
+  }
+
+  /* Glow that follows the element's own color — used by selected swatches. */
+  .glow-current {
+    box-shadow: 0 0 10px currentColor;
   }
 
   .font-bungee {
@@ -302,16 +369,6 @@
     font-family: 'Share Tech Mono', monospace;
   }
 
-  .tag-active {
-    background: var(--cyan);
-    color: #0A0A0B;
-  }
-
-  .tag-inactive {
-    background: rgba(0, 217, 255, 0.08);
-    color: var(--cyan);
-    border: 1px solid rgba(0, 217, 255, 0.2);
-  }
 }
 
 

@@ -14,7 +14,7 @@ interface EventFormModalProps {
 
 const COLOR_OPTIONS: CalendarEvent['color'][] = ['cyan', 'purple', 'rose', 'amber', 'teal'];
 
-const FIELD_CLASS = "w-full px-3 py-2 rounded-xl font-inter text-[0.82rem] bg-white/[0.05] border border-cyan-primary/15 text-foreground outline-none focus:border-cyan-primary/50 transition-colors";
+const FIELD_CLASS = "w-full px-3 py-2 rounded-xl font-inter text-sm bg-white/[0.05] border border-cyan-primary/15 text-foreground outline-none focus:border-cyan-primary/50 transition-colors";
 
 function Field({
   label,
@@ -25,7 +25,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block mb-1.5 font-mono-tech text-[0.6rem] tracking-[0.08em] text-muted-foreground">
+      <label className="block mb-1.5 font-mono-tech text-2xs tracking-[0.08em] text-muted-foreground">
         {label}
       </label>
       {children}
@@ -92,7 +92,7 @@ export function EventFormModal({ open, onClose, onEventCreated }: EventFormModal
             <Dialog.Title className="sr-only">New Event</Dialog.Title>
             <Dialog.Description className="sr-only">Create a new calendar event.</Dialog.Description>
             <div
-              className="w-full max-w-md rounded-2xl overflow-hidden bg-[#0f0f12]/95 border border-cyan-primary/20 shadow-[0_0_60px_rgba(0,217,255,0.1),0_32px_64px_rgba(0,0,0,0.6)]"
+              className="w-full max-w-md rounded-2xl overflow-hidden bg-surface-modal/95 border border-cyan-primary/20 shadow-modal"
             >
               {/* Header */}
               <div
@@ -105,7 +105,7 @@ export function EventFormModal({ open, onClose, onEventCreated }: EventFormModal
                     <CalendarPlus size={15} className="text-cyan-primary" />
                   </div>
                   <h2
-                    className="font-bungee text-[0.95rem] tracking-[-0.01em] text-foreground"
+                    className="font-bungee text-base tracking-[-0.01em] text-foreground"
                   >
                     NEW EVENT
                   </h2>
@@ -175,10 +175,9 @@ export function EventFormModal({ open, onClose, onEventCreated }: EventFormModal
                           key={c}
                           type="button"
                           onClick={() => setColor(c)}
-                          className={cn("w-8 h-8 rounded-full flex items-center justify-center transition-transform hover:scale-110", colors.dotClass, color === c ? "border-2 border-white" : "border-2 border-transparent")}
-                          style={{ boxShadow: color === c ? '0 0 10px currentColor' : 'none' }}
+                          className={cn("w-8 h-8 rounded-full flex items-center justify-center transition-transform hover:scale-110", colors.dotClass, color === c ? "border-2 border-white glow-current" : "border-2 border-transparent")}
                         >
-                          {color === c && <Check size={12} className="text-[#0A0A0B]" />}
+                          {color === c && <Check size={12} className="text-primary-foreground" />}
                         </button>
                       );
                     })}
@@ -196,13 +195,13 @@ export function EventFormModal({ open, onClose, onEventCreated }: EventFormModal
                       className={cn("w-2 h-2 rounded-full shrink-0", EVENT_COLOR_MAP[color].dotClass)}
                     />
                     <span
-                      className="font-inter text-[0.78rem] font-medium text-foreground"
+                      className="font-inter text-sm font-medium text-foreground"
                     >
                       {title}
                     </span>
                     {date && time && (
                       <span
-                        className={cn("ml-auto font-mono-tech text-[0.62rem]", EVENT_COLOR_MAP[color].textClass)}
+                        className={cn("ml-auto font-mono-tech text-2xs", EVENT_COLOR_MAP[color].textClass)}
                       >
                         {date} · {time}
                       </span>
@@ -215,7 +214,7 @@ export function EventFormModal({ open, onClose, onEventCreated }: EventFormModal
                   type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
-                  className={cn("w-full py-3 rounded-xl flex items-center justify-center gap-2 font-inter font-semibold text-[0.85rem] transition-colors duration-300", saved ? "bg-gradient-to-br from-emerald-400 to-emerald-500 text-[#0A0A0B]" : "bg-gradient-to-br from-cyan-primary to-cyan-dim text-[#0A0A0B]")}
+                  className={cn("w-full py-3 rounded-xl flex items-center justify-center gap-2 font-inter font-semibold text-sm transition-colors duration-300", saved ? "bg-gradient-to-br from-emerald-400 to-emerald-500 text-primary-foreground" : "bg-gradient-to-br from-cyan-primary to-cyan-dim text-primary-foreground")}
                 >
                   {saved ? (
                     <>

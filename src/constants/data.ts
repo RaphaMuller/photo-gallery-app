@@ -306,9 +306,9 @@ export const EVENTS: CalendarEvent[] = [
 export const ALL_TAGS = ['urban', 'portrait', 'nature', 'architecture', 'abstract', 'travel', 'night'] as const;
 
 export const EVENT_COLOR_MAP: Record<string, { bgClass: string; textClass: string; dotClass: string; borderClass: string; shadowClass: string }> = {
-  cyan:   { bgClass: 'bg-cyan-primary/[0.12]',   textClass: 'text-cyan-primary', dotClass: 'bg-cyan-primary', borderClass: 'border-cyan-primary/20', shadowClass: 'shadow-[0_0_6px_rgba(0,217,255,0.5)]' },
-  purple: { bgClass: 'bg-[#a78bfa]/[0.15]',  textClass: 'text-[#a78bfa]', dotClass: 'bg-[#a78bfa]', borderClass: 'border-[#a78bfa]/20', shadowClass: 'shadow-[0_0_6px_rgba(167,139,250,0.5)]' },
-  rose:   { bgClass: 'bg-[#fb7185]/[0.12]',   textClass: 'text-[#fb7185]', dotClass: 'bg-[#fb7185]', borderClass: 'border-[#fb7185]/20', shadowClass: 'shadow-[0_0_6px_rgba(251,113,133,0.5)]' },
-  amber:  { bgClass: 'bg-[#fbbf24]/[0.12]',  textClass: 'text-[#fbbf24]', dotClass: 'bg-[#fbbf24]', borderClass: 'border-[#fbbf24]/20', shadowClass: 'shadow-[0_0_6px_rgba(251,191,36,0.5)]' },
-  teal:   { bgClass: 'bg-[#4ecdc4]/[0.12]',  textClass: 'text-[#4ecdc4]', dotClass: 'bg-[#4ecdc4]', borderClass: 'border-[#4ecdc4]/20', shadowClass: 'shadow-[0_0_6px_rgba(78,205,196,0.5)]' },
+  cyan:   { bgClass: 'bg-cyan-primary/12', textClass: 'text-cyan-primary', dotClass: 'bg-cyan-primary', borderClass: 'border-cyan-primary/20', shadowClass: 'shadow-glow-xs-cyan' },
+  purple: { bgClass: 'bg-purple/15',       textClass: 'text-purple',       dotClass: 'bg-purple',       borderClass: 'border-purple/20',       shadowClass: 'shadow-glow-xs-purple' },
+  rose:   { bgClass: 'bg-rose/12',         textClass: 'text-rose',         dotClass: 'bg-rose',         borderClass: 'border-rose/20',         shadowClass: 'shadow-glow-xs-rose' },
+  amber:  { bgClass: 'bg-amber/12',        textClass: 'text-amber',        dotClass: 'bg-amber',        borderClass: 'border-amber/20',        shadowClass: 'shadow-glow-xs-amber' },
+  teal:   { bgClass: 'bg-teal/12',         textClass: 'text-teal',         dotClass: 'bg-teal',         borderClass: 'border-teal/20',         shadowClass: 'shadow-glow-xs-teal' },
 };

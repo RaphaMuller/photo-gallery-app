@@ -25,3 +25,11 @@ Não migrar componentes ainda — só definir os tokens. Migração é T2+.
 - Tokens definidos no `@theme`, build passa.
 - `--chart-*` órfãos resolvidos (renomeados/reaproveitados como tokens semânticos).
 - Nenhum componente alterado ainda (essa task é só a fundação).
+
+## Status: feito (com desvio)
+
+- **Tokens + build:** OK. `--chart-1..5` removidos e reaproveitados na paleta neon.
+- **Desvio nos aliases semânticos:** o critério pedia `--color-tag-*`/`--color-event-*`/`--color-frame-*`. Foram criados e **removidos** — optou-se por paleta flat (`cyan-primary`, `purple`, `rose`, `amber`, `teal`, `green`, `indigo`). Motivo: a migração foi feita in-place mantendo os mapas de cor nos componentes (decisão do executor, fora do escopo original do T1), então os aliases por domínio virariam tokens órfãos — o mesmo smell que acabara de ser corrigido nos `--chart-*`. Os mapas (`TAG_COLORS`, `STICKER_FRAMES`, `EVENT_COLOR_MAP`) seguem como camada semântica e referenciam a paleta flat.
+- **Tipografia (P11):** resolvida aqui — todo `text-[Xrem]` arbitrário foi trocado pela escala nomeada (`text-3xs/2xs/hero` + Tailwind xs/sm/base/lg). P11 era parte do escopo do T1 (T1 resolve P2 + P11).
+- **"Nenhum componente alterado" não vale mais:** a migração dos componentes (terreno do T2) foi feita junto, no mesmo PR. T1 deixou de ser só fundação.
+- Registrado no `CHANGELOG.md` (seção 7).
