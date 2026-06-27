@@ -30,3 +30,9 @@ Substituir:
 - Zero duplicação de mapa cor→classe; tudo deriva de `lib/theme`.
 - PhotoCard e PhotoModal usam a fonte única.
 - Build + visual idênticos ao atual (refactor puro, sem mudança de aparência).
+
+## Status: parcial (terreno mudou)
+
+Durante o T1, os **valores** dos 4 mapas já foram tokenizados — `TAG_COLORS` (×2), `STICKER_FRAMES` e `EVENT_COLOR_MAP` agora usam tokens da paleta flat (`text-purple`, `bg-cyan-primary/12`, `shadow-glow-lg-rose`, etc.), sem mais hex hardcoded.
+
+**Ainda pendente (o core do T2):** a *duplicação* segue — os 4 mapas continuam existindo em formatos diferentes. Falta criar a fonte única em `lib/theme` e derivar todos dela. O ganho agora é menor (não tem mais hex pra caçar), mas o smell-raiz P3 (mesma palette codificada N vezes) não foi resolvido.

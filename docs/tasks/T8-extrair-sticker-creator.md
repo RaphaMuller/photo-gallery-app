@@ -20,3 +20,9 @@
 - PhotoModal < ~250 linhas, só "mostrar foto + tabs".
 - `StickerCreator` autocontido, cores via palette canônica.
 - Wizard funciona igual.
+
+## Status: parcial (cores tokenizadas, não extraído)
+
+No T1, as cores de `STICKER_FRAMES` viraram tokens (`text-purple`, `bg-teal/15`, `shadow-glow-sm-amber`, `shadow-glow-lg-*`, etc.) — sem hex hardcoded.
+
+**Ainda pendente:** `StickerCreator` + `STICKER_FRAMES` **continuam inline no `PhotoModal.tsx`**; o arquivo segue grande com múltiplas responsabilidades. Falta extrair pra `features/gallery/components/StickerCreator.tsx`.
