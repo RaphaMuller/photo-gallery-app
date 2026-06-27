@@ -1,67 +1,68 @@
 <!-- BEGIN:nextjs-agent-rules -->
 
-# This is NOT the Next.js you know
+# Engineering Rules — Social Gallery
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+These are the architectural and code rules for this project. Treat them as binding: follow them by default and only deviate when the user explicitly asks. When a deviation is unavoidable, record it in the `CHANGELOG.md` so the next reader knows why.
 
-<!-- END:nextjs-agent-rules -->
+## Quick Reference
 
-<!-- BEGIN:caveman-rules -->
+- **Structure:** group by feature (FSD), not by file type.
+- **Types:** zero `any`; `interface` for entities, `type` for unions.
+- **Styling:** glassmorphism via utilities + `cn()`; no `style={{...}}` for color/bg/border/filter; tokens-first, zero raw hex.
+- **State:** `@tanstack/react-query` for server state; `useState`/Context for local UI.
+- **Docs:** every PR updates `CHANGELOG.md`, and `AGENTS.md` / `README.md` / `docs/` when they apply.
 
-Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman
-while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra,
-wenyan-lite, wenyan-full, wenyan-ultra.
-Use when user says "caveman mode", "talk like caveman", "use caveman", "less tokens",
-"be brief", or invokes /caveman. Also auto-triggers when token efficiency is requested.
+---
 
-Respond terse like smart caveman. All technical substance stay. Only fluff die.
+## 1. Directory Structure (Feature-Sliced Design — simplified)
 
-## Rules
+- Group files by **feature** (business domain), not by file type.
+- `src/features/`: independent domains (e.g. `features/auth`, `features/gallery`). Each owns its components, hooks, and utils.
+- `src/components/ui/`: only "dumb", generic visual components (buttons, inputs) shared globally.
 
-Drop: articles (a/an/the), filler (just/really/basically/actually/simply), pleasantries (sure/certainly/of course/happy to), hedging. Fragments OK. Short synonyms (big not extensive, fix not "implement a solution for"). No tool-call narration, no decorative tables/emoji, no dumping long raw error logs unless asked — quote shortest decisive line. Standard well-known tech acronyms OK (DB/API/HTTP); never invent new abbreviations reader can't decode. Technical terms exact. Code blocks unchanged. Errors quoted exact.
+## 2. TypeScript (Strict)
 
-Preserve user's dominant language. User write Portuguese → reply Portuguese caveman. User write Spanish → reply Spanish caveman. Compress the style, not the language. No forced English openings or status phrases. ALWAYS keep technical terms, code, API names, CLI commands, commit-type keywords (feat/fix/...), and exact error strings verbatim — unless user explicitly ask for translation.
+- **Zero `any`:** `any` is forbidden. Use `unknown` with validation when the type is genuinely unknown.
+- Global DB interfaces live in `src/types/index.ts`.
+- Local, file-specific types go at the top of the consuming file.
+- Use `interface` for entities/objects and `type` for literals/unions.
 
-No self-reference. Never name or announce the style. No "caveman mode on", "me caveman think", no third-person caveman tags. Output caveman-only — never normal answer plus "Caveman:" recap. Exception: user explicitly ask what the mode is.
+## 3. Styling & Design System (Strict No-Inline Policy)
 
-Pattern: `[thing] [action] [reason]. [next step].`
+- **Strict glassmorphism:** the visual language is neon, dark themes, and translucent glass.
+- **No `style={{...}}` for design:** never mix logic with inline CSS in JSX. The `style` attribute is forbidden for colors, borders, backgrounds, and filters.
+- **Utility classes (`globals.css`):** every repeated glassmorphism pattern (blur, complex RGBA backgrounds, translucent borders) MUST be abstracted into `@layer utilities` in `globals.css` (e.g. `.glass-modal`, `.glass-overlay`, `.glass-input`).
+- **Conditionals with `cn()`:** any style variation driven by state or props (e.g. `isActive ? 'bg-cyan' : 'bg-transparent'`) MUST go through the `cn()` helper (`clsx` + `tailwind-merge`) imported from `src/lib/utils`.
+- **Animations (Framer Motion):** keep simple objects (`initial`, `animate`, `exit`) inline for readability, but the DOM's core CSS stays purely in `className`.
 
-Not: "Sure! I'd be happy to help you with that. The issue you're experiencing is likely caused by..."
-Yes: "Bug in auth middleware. Token expiry check use `<` not `<=`. Fix:"
+### 3.1 Design Tokens (Tokens-First — No Raw Values)
 
-Code/commits/PRs: write normal.
+Tokens live in the `@theme inline` block of `globals.css` and are the **single source** for color, typography, glow, and surfaces. JSX never carries raw values.
 
-<!-- END:caveman-rules -->
-
-<!-- BEGIN:prd-architecture-rules -->
-
-# PRD: Arquitetura e Padrões de Código
-
-Sempre obedeça as seguintes diretrizes arquiteturais para este projeto (Galeria Social):
-
-## 1. Estrutura de Diretórios (Feature-Sliced Design - FSD simplificado)
-
-- Agrupe arquivos por **funcionalidade** (domínio de negócio), não por tipo de arquivo.
-- `src/features/`: Domínios independentes (ex: `features/auth`, `features/gallery`). Contêm componentes, hooks e utils próprios.
-- `src/components/ui/`: Apenas componentes visuais "burros" e genéricos (ex: botões, inputs) compartilhados globalmente.
-
-## 2. Tipagem TypeScript (Estrita)
-
-- **Zero `any`:** O uso de `any` é proibido. Use `unknown` com validação se o tipo for desconhecido.
-- Interfaces globais de BD devem morar em `src/types/index.ts`.
-- Tipagens específicas locais ficam no topo do arquivo consumidor.
-- Use `interface` para entidades/objetos e `type` para literais/uniões.
-
-## 3. Estilização e Design System (Strict No-Inline Policy)
-
-- **Glassmorphism Estrito:** A estética visual baseia-se em neons, dark themes e vidros translucidos.
-- **Proibido usar `style={{...}}`:** Nunca misture lógica com CSS inline no JSX. O uso do atributo `style` está estritamente proibido para cores, bordas, backgrounds ou filtros.
-- **Classes Utilitárias (`globals.css`):** Todas as repetições de Glassmorphism (blur, backgrounds RGBA complexos, bordas translucidas) DEVEM ser abstraídas em `@layer utilities` no `globals.css` (ex: `.glass-modal`, `.glass-overlay`, `.glass-input`).
-- **Condicionais com `cn()`:** Qualquer variação de estilo no JSX baseada em estados ou props (ex: `isActive ? 'bg-cyan' : 'bg-transparent'`) deve ser estruturada utilizando o utilitário `cn()` (combinação de `clsx` + `tailwind-merge`) importado de `src/lib/utils`.
-- **Animações (Framer Motion):** Mantemos objetos simples (`initial`, `animate`, `exit`) no componente para clareza visual, mas o CSS core do DOM se mantém puramente pelo `className`.
+- **No hardcoded hex/rgba in JSX:** no `#00D9FF` or `rgba(0,217,255,.12)` in `className`. Use the registered color token (`bg-cyan-primary`, `text-cyan-primary`, `border-cyan-primary`, `from-cyan-primary`). Neon palette: `cyan-primary`, `cyan-dim`, `purple`, `rose`, `amber`, `teal`, `green`, `indigo`.
+- **No design arbitrary values:** no `text-[0.6rem]`, `shadow-[0_0_20px_rgba(...)]`, `bg-[#14141a]`. Use the tokens instead:
+  - **Surfaces:** `bg-surface-modal`, `bg-surface-card`, `bg-surface-deep` (near-blacks).
+  - **Typography micro-scale:** `text-3xs` (9px), `text-2xs` (10px), `text-hero` (56px) — additive to Tailwind's `xs/sm/base/lg`.
+  - **Glows:** per-color `shadow-glow-{xs,sm,lg}-{cyan,purple,rose,amber,teal,green}` and structural `shadow-glow-cyan-{sm,md,lg,strong}`, `shadow-glow-white-{sm,md}`, `shadow-card`, `shadow-card-glow`, `shadow-modal`, `shadow-modal-lg`.
+- **Opacity modifiers require a literal-hex token:** in `@theme inline`, `bg-cyan-primary/12` only applies the alpha if the token is a **literal color** (`--color-cyan-primary: #00D9FF`). A `var(--cyan)` reference makes Tailwind drop the opacity and render full strength. **Never** define a color token as `var(...)` if it is used with a `/N` modifier.
+- **Page gradient & ambient glows via utility:** use `.bg-app-gradient` (single source for the 3-stop page gradient — do not re-create `from-/via-/to-` inline), `.ambient-glow-cyan` / `.ambient-glow-purple` (radial background glows), and `.glow-current` (glow that follows the element's `currentColor`).
+- **Color maps reference tokens:** `EVENT_COLOR_MAP`, `TAG_COLORS`, `STICKER_FRAMES`, etc. are a semantic layer and must return classes/tokens (`bg-cyan-primary/[0.12]`), never raw `rgba(...)` strings.
+- **No orphan tokens:** do not register a token nobody consumes (that was the `--chart-1..5` smell). A new token lands with its usage; a token left unused gets removed.
+- **Legitimate dynamic `style` is still allowed:** only runtime-computed values that are NOT color/bg/border/filter — e.g. `minHeight`, `opacity`, spinner size. Color/bg/border/filter **always** go through `className`.
 
 ## 4. State Management
 
-- **Server State:** Use `@tanstack/react-query` para comunicação com Supabase (fetching, caching, mutation).
-- **UI State Local:** Use `useState` ou Context API.
+- **Server state:** use `@tanstack/react-query` for Supabase communication (fetching, caching, mutation).
+- **Local UI state:** use `useState` or Context API.
+
+## 5. Documentation Required on Every PR
+
+Every feature, refactor, or structural decision must update the docs **in the same PR** that introduces it. A PR that changes behavior or a convention without touching the matching doc is incomplete. Before opening a PR, walk the four targets below and update whichever apply:
+
+1. **`CHANGELOG.md`** — **always.** Add a new numbered section (continuing the sequence) describing the what, the why, and any conscious deviation/risk. Close it with the date as `> Data e hora: YYYY-MM-DD`. This is the project's narrative history — never skip it.
+2. **`AGENTS.md` (this file)** — when the PR creates or changes a **convention** (new token, new utility, new styling/typing/architecture rule). The rule lands here before it's enforced in review.
+3. **`README.md`** — when **setup, stack, scripts, environment variables, or the directory tree** the README describes change. Keep it true to what a fresh clone sees today.
+4. **`docs/`** — create or update a dedicated doc for changes with depth (architectural decision, refactor plan, integration). Refactor tasks live in `docs/tasks/`; broad decisions get their own doc. Link the doc from the `CHANGELOG` entry when it helps.
+
+**PR self-check:** `CHANGELOG` updated? New convention → `AGENTS.md`? Setup/stack changed → `README`? Deep change → doc in `docs/`?
 <!-- END:prd-architecture-rules -->
