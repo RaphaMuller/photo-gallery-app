@@ -74,6 +74,26 @@ Configuramos a camada de qualidade de código (lint + format) para garantir cons
 - **Dependências:** Adicionados `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`, `globals` e fixadas versões de `eslint` (`^9.39.4`).
 - **Correção em `AGENTS.md`:** Corrigido typo "DEBEM" → "DEVEM" na regra de classes utilitárias de glassmorphism.
 
+## 7. Design System: Tokenização e Migração de CSS (Fase 0 — T1)
+
+Início do refactor de arquitetura descrito em [`docs/arquitetura-refactor.md`](./docs/arquitetura-refactor.md). Esta etapa estabelece a fundação de tokens e quita a dívida de CSS (P1, P2, P11) que já violava o PRD.
+
+- **Tokens no `@theme` (T1):** Os `--chart-1..5` órfãos foram reaproveitados numa paleta neon de verdade, registrada como tokens de cor (`cyan-primary`, `cyan-dim`, `purple`, `rose`, `amber`, `teal`, `green`, `indigo`). Adicionados tokens de superfície near-black (`surface-modal/card/deep`), micro-escala tipográfica (`text-3xs`, `text-2xs`, `text-hero`) e glows como tokens de shadow (per-color `shadow-glow-{xs,sm,lg}-*` + estruturais `shadow-modal`, `shadow-card`, etc.).
+- **Correção de bug latente:** As utilities `bg-cyan-primary` / `border-cyan-primary` / `from-cyan-primary` (~80 ocorrências) **nunca renderizavam** — `cyan-primary` só existia como classe `.text-cyan-primary`, nunca como token de cor. Ao registrar o token, todas passaram a resolver.
+- **Migração dos componentes:** Todo hex hardcoded, `text-[Xrem]` arbitrário, `shadow-[...]` arbitrário e `style={{}}` de cor/bg/borda/filtro foram trocados por tokens/utilities. Mantidos apenas os `style` dinâmicos legítimos (`minHeight`, `opacity`, tamanho do spinner). Criadas utilities `.bg-app-gradient` (fonte única do gradiente de página, mata a divergência landing↔gallery), `.ambient-glow-*` e `.glow-current`. Removidas utilities mortas (`cyan-glow`, `glass-panel`, `tag-active/inactive`) e a `.text-cyan-primary` redundante.
+- **Desvio consciente do critério de aceite do T1:** A task pedia aliases semânticos `--color-tag-*`/`--color-event-*`/`--color-frame-*`. Foram criados e depois removidos: sob migração in-place (mapas de cor mantidos nos componentes), virariam tokens órfãos — exatamente o smell recém-corrigido nos `--chart-*`. Optou-se pela paleta flat; os mapas (`TAG_COLORS`, `STICKER_FRAMES`, `EVENT_COLOR_MAP`) seguem como camada semântica e agora referenciam tokens.
+- **Escopo ainda aberto:** Colapsar os 4 mapas numa fonte única (T2) e mover `EVENT_COLOR_MAP` p/ `lib/theme` (T9) seguem pendentes. T11 (tipografia) foi efetivamente resolvido junto.
+
+> Data e hora: 2026-06-26
+
+## 8. Bypass de Autenticação (Demo) e Tooling de PR
+
+- **Bypass de auth (demo):** Adicionada a flag `NEXT_PUBLIC_BYPASS_AUTH`. Quando `true`, o middleware (`src/lib/supabase/middleware.ts`) pula o gate de login do `/gallery` e o botão "Continuar com Google" (landing + `AuthModal`) redireciona direto para `/gallery`, sem OAuth. **Risco:** desliga o gate por completo e `NEXT_PUBLIC_*` é inlined no bundle do client — nunca habilitar em produção. Desligado por padrão.
+- **Skill `/open-pr`:** Criada em `.claude/skills/open-pr/SKILL.md` — abre PR da branch atual com mapeamento de áreas FSD, checklist honesto (build/lint; repo sem test runner) e corpo em pt-BR. Documenta o fallback `gh api -X PATCH` para editar PRs (o `gh pr edit --body` falha silenciosamente neste repo por causa do GraphQL de Projects-classic deprecado).
+- **Template de PR:** `.github/pull_request_template.md` com as mesmas seções, pré-preenchido pelo GitHub.
+
+> Data e hora: 2026-06-26
+
 ---
 
 > **A partir de agora:** Todas as novas features, refatorações ou decisões estruturais importantes devem ser logadas neste arquivo ou em subarquivos de histórico, mantendo a documentação técnica impecável e acompanhando o histórico de prompts.
