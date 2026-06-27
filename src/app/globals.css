@@ -113,8 +113,11 @@
      Registered as real color tokens so bg-/text-/border-/from- utilities
      resolve (previously bg-cyan-primary/border-cyan-primary were unregistered
      no-ops). Replaces the orphaned --chart-1..5 tokens. */
-  --color-cyan-primary: var(--cyan);
-  --color-cyan-dim: var(--cyan-dim);
+  /* Literal hex (not var(--cyan)): in @theme inline, an opacity modifier like
+     bg-cyan-primary/12 only works when the token is a literal color — a var()
+     reference makes Tailwind drop the opacity and render full strength. */
+  --color-cyan-primary: #00D9FF;
+  --color-cyan-dim: #00A8CC;
   --color-purple: #a78bfa;
   --color-rose: #fb7185;
   --color-amber: #fbbf24;
